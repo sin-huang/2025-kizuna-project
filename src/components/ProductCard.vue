@@ -1,6 +1,11 @@
 <script setup>
 import { useProductStore } from "@/stores/products.js";
+import { useuseCartStore } from "@/stores/cart.js";
+
 const productStore = useProductStore();
+const cartStore = useCartStore();
+
+const { addCart } = cartStore; //解構拿來使用
 
 defineProps({
   product: {
@@ -13,10 +18,9 @@ defineProps({
 
 <template>
   <p>{{ product.name }}</p>
-  <br />
   <p>{{ product.price }}</p>
-  <br />
   <p>{{ product.inventory }}</p>
+  <button @click="addCart(product)">加入購物車</button>
 </template>
 
 <style scoped></style>

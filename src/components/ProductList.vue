@@ -3,6 +3,7 @@ import { useProductStore } from "@/stores/products.js";
 import ProductCard from "@/components/ProductCard.vue";
 const productStore = useProductStore();
 const { products } = productStore;
+// 記得要解構
 </script>
 
 <template>
