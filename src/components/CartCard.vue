@@ -2,7 +2,7 @@
 import { useCartStore } from "@/stores/cart.js";
 const cartStore = useCartStore();
 const { cartItems } = cartStore;
-//三部曲:傳資料
+//傳資料:三部曲
 
 defineProps({
   item: {
@@ -13,10 +13,9 @@ defineProps({
 </script>
 
 <template>
-  <p>{{ item.id }}</p>
-  <p>{{ item.name }}</p>
-  <p>{{ item.price }}</p>
-  <p>{{ item.quantity }}</p>
+  <p>商品: {{ item.name }}</p>
+  <p>價格: {{ item.price }}</p>
+  <p>數量: {{ item.quantity }}</p>
 </template>
 
 <style scoped></style>

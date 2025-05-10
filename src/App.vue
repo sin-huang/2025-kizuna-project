@@ -6,6 +6,7 @@ import { RouterLink, RouterView } from "vue-router";
   <header>
     <nav>
       <RouterLink to="/">Product</RouterLink>
+      <RouterLink to="/cart">Cart</RouterLink>
     </nav>
   </header>
 
