@@ -1,10 +1,6 @@
 <script setup>
 import { useCartStore } from "@/stores/cart.js";
-import { useProductStore } from "@/stores/products.js";
 const cartStore = useCartStore();
-const productStore = useProductStore();
-// 傳資料
-// const { cartItems, totalPrice, totalItems } = storeToRefs(cartStore); 這邊不會用到這些資訊，函式不能寫入storeToRefs?
 
 defineProps({
   item: {
@@ -21,7 +17,6 @@ defineProps({
       <p>商品: {{ item.name }}</p>
     </div>
     <p>價格: {{ item.price }}</p>
-    <!-- 問題在這 -->
     <input
       type="number"
       :value="item.quantity" min="1"
