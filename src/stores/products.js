@@ -68,12 +68,10 @@ export const useProductStore = defineStore("products", () => {
     },
   ]);
 
-  //取得所有可以購買的商品(庫存大於0) 記得計算要加computed!!!!
   const avaliableProducts = computed(() => {
     return products.value.filter((product) => product.inventory > 0);
   });
 
-  //減少庫存
   const decreaseInventory = (itemId, itemQuantity) => {
     const product = products.value.find((product) => product.id === itemId);
 
@@ -82,7 +80,6 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
-  //增加庫存
   const increaseInventory = (itemId, itemQuantity) => {
     const product = products.value.find((product) => product.id === itemId);
 

@@ -2,7 +2,6 @@
 import CartCard from "@/components/CartCard.vue";
 import { useCartStore } from "@/stores/cart.js";
 const cartStore = useCartStore();
-//解構出來的東西不是響應式
 </script>
 
 <template>

@@ -54,12 +54,11 @@ export const useCartStore = defineStore("cart", () => {
       const diff = newQuantity - item.quantity;
       item.quantity = newQuantity;
 
-      // 根據數量變化更新庫存
-      // 買的變多，庫存變少
+      // 買的變多/少，庫存變少/多
       if (diff > 0) {
         productStore.decreaseInventory(itemId, diff);
       } else {
-        // 注意此情況diff是負數
+        // 注意此時diff為負數
         productStore.increaseInventory(itemId, -diff);
       }
     }
