@@ -20,7 +20,7 @@ const cartStore = useCartStore();
     <div class="text-right">
       <button
         @click="cartStore.clearCart()"
-        class="bg-blue-600 text-white w-fit px-4 py-1 rounded hover:bg-blue-700"
+        class="px-4 py-1 text-white bg-blue-600 rounded w-fit hover:bg-blue-700"
       >
         清空購物車
       </button>
