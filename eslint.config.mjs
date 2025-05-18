@@ -21,7 +21,7 @@ export default defineConfig([
     },
     rules: {
       // 禁止 console.log 只允許 warn / error
-      "no-console": ["error", { allow: ["warn", "error"] }],
+      // "no-console": ["error", { allow: ["warn", "error"] }],
     },
   },
 
@@ -39,7 +39,7 @@ export default defineConfig([
     plugins: { vue: pluginVue },
     rules: {
       ...pluginVue.configs["flat/essential"].rules,
-      "no-console": ["error", { allow: ["warn", "error"] }],
+      // "no-console": ["error", { allow: ["warn", "error"] }],
     },
   },
   // JSON 檔案

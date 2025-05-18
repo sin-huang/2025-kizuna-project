@@ -28,6 +28,7 @@ instance.interceptors.request.use((config) => {
 // 就嘗試刷新一下 有可能只是 accessToken 過期不能使用了(不是他沒資格)
 // 將原本失敗的 req 的 header 更新成新的 access token
 // 然後直接重發 req
+
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -35,7 +36,7 @@ instance.interceptors.response.use(
     if (error.response?.status === 401 && userStore.refreshToken) {
       try {
         await userStore.refresh();
-        error.config.headers.Authorization = `Bearer${userStore.accessToken}`;
+        error.config.headers.Authorization = `Bearer ${userStore.accessToken}`;
         return instance(error.config);
       } catch (refreshError) {
         userStore.logout();
