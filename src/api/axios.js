@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   const userStore = useUserStore();
   if (userStore.accessToken) {
-    config.headers.Authorization = `Bearer${userStore.accessToken}`;
+    config.headers.Authorization = `Bearer ${userStore.accessToken}`;
   }
   return config;
 });
@@ -44,6 +44,9 @@ instance.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
+    // 在 interceptors.response 的錯誤處理中 如果不是 401 或 refresh 失敗 
+    // 必須回傳 Promise.reject(error) 否則 Vue 或 Pinia 端接不到錯誤訊息。 
+    return Promise.reject(error);
   }
 );
 
