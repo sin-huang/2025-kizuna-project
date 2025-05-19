@@ -1,34 +1,10 @@
 
-# 2025-kizuna-project
-交友軟體Web版
+# 2025-kizuna-project ( 交友軟體Web版 )
 
-# shopping
 
-This template should help get you started developing with Vue 3 in Vite.
+## 開發套件相關規定
 
-## Recommended IDE Setup
+* 使用 `tailwind` 時，要下載 `vscode` 的擴充功能(`extensions`) 「`Headwind`」這樣大家的 `class`中的`tailwind`順序才會一樣  
+![image](https://github.com/user-attachments/assets/488a73f4-b0e0-4d9c-8fb3-fd7a1cdcbd4d)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
 
