@@ -14,10 +14,12 @@ console.log(`REFRESH_SECRET: ${REFRESH_SECRET}`);
 export async function register(req, res) {
   const { username, password } = req.body;
   const hashed = await bcrypt.hash(password, 10);
+  // 正式環境要拿掉raw_password欄位
   try {
-    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
+    await pool.query("INSERT INTO users (username, password, raw_password) VALUES ($1, $2, $3)", [
       username,
       hashed,
+      password,
     ]);
     res.json({ message: "註冊成功" });
   } catch (error) {
