@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// API
+// API 在這設定前端打什麼 後端去執行哪個方法
 app.post("/api/register", authController.register);
 app.post("/api/login", authController.login);
 app.post("/api/refresh", authController.refresh);
