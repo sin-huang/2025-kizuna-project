@@ -15,7 +15,7 @@ export const useUserStore = defineStore("user", {
         const res = await axios.post("/api/register", { username, password });
         // 只有當後端真的回傳成功才算註冊成功
         if (res.status === 200) {
-          console.log("註冊成功", res.data);
+          // console.log("註冊成功", res.data);
           return { success: true, message: res.data.message };
         } else {
           console.warn("非 200 回應", res);
@@ -39,8 +39,8 @@ export const useUserStore = defineStore("user", {
           username,
           password
         });
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
         this.accessToken = res.data.accessToken;
         this.refreshToken = res.data.refreshToken;
 

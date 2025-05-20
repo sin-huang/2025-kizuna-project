@@ -26,8 +26,8 @@ const handleLogin = async () => {
 
 <template>
   <!-- 在template中 會自動解包 所以存取值不用.value-->
-  <div class="w-[600px] h-[430px] bg-[#C0D7EC] rounded-[20px]">
-    <div class="mx-auto w-[500px] py-5">
+  <div class="w-[600px] h-[450px] bg-[#C0D7EC] bg-opacity-70 rounded-[20px]">
+    <div class="mx-auto w-[500px] py-10">
       <!-- 登入 + 新用戶 -->
       <div class="flex justify-between">
         <h2 class="text-[#3E6588] font-black text-2xl">登入</h2>
