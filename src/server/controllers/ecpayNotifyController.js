@@ -1,4 +1,4 @@
-// 
+// 發票開立通知
 import ECPay from "ecpay_aio_nodejs";
 import dotenv from "dotenv";
 dotenv.config();
@@ -16,7 +16,7 @@ export async function handlePaymentNotify(req, res) {
   try {
     const { MerchantTradeNo, TradeAmt, PaymentDate } = req.body;
 
-    console.log("✅ 收到綠界通知", req.body);
+    // console.log("✅ 收到綠界通知", req.body);
 
     // 假資料（應從資料庫取得實際訂單內容）
     const invoiceData = {
@@ -43,7 +43,7 @@ export async function handlePaymentNotify(req, res) {
     const ecpay = new ECPay(options, "Merchant");
     const result = await ecpay.invoice_client.issue(invoiceData);
 
-    console.log("✅ 成功開立發票", result);
+    // console.log("✅ 成功開立發票", result);
 
     res.send("1|OK"); // 綠界要求這樣表示收到
   } catch (err) {

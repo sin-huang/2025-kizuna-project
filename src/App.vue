@@ -13,19 +13,20 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <header class="bg-blue-900 text-white shadow-md">
+  <header class="text-white bg-blue-900 shadow-md">
     <nav class="flex justify-start">
-      <RouterLink to="/" class="p-6 text-lg hover:text-gray-300 transition">首頁</RouterLink>
-      <RouterLink to="/product" class="p-6 text-lg hover:text-gray-300 transition">商品列表</RouterLink>
-      <RouterLink to="/cart" class="p-6 text-lg hover:text-gray-300 transition">購物車</RouterLink>
+      <RouterLink to="/" class="p-6 text-lg transition hover:text-gray-300">首頁</RouterLink>
+      <RouterLink to="/product" class="p-6 text-lg transition hover:text-gray-300">商品列表</RouterLink>
+      <RouterLink to="/cart" class="p-6 text-lg transition hover:text-gray-300">購物車</RouterLink>
+      <RouterLink to="/subscribe" class="p-6 text-lg transition hover:text-gray-300">訂閱</RouterLink>
       <!-- 有token 代表已經登入 所以只剩登出按鈕 -->
       <template v-if="store.accessToken">
-        <button @click="handleLogout" class="p-6 text-lg hover:text-gray-300 transition">登出</button>
+        <button @click="handleLogout" class="p-6 text-lg transition hover:text-gray-300">登出</button>
       </template>
       <!-- 沒有token 請先登入或註冊新帳號 -->
       <template v-else>
-        <RouterLink to="/login" class="p-6 text-lg hover:text-gray-300 transition">登入</RouterLink>
-        <RouterLink to="/register" class="p-6 text-lg hover:text-gray-300 transition">註冊</RouterLink>
+        <RouterLink to="/login" class="p-6 text-lg transition hover:text-gray-300">登入</RouterLink>
+        <RouterLink to="/register" class="p-6 text-lg transition hover:text-gray-300">註冊</RouterLink>
       </template>
     </nav>
   </header>
