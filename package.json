@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": " nodemon src/server/server.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -43,8 +44,10 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "ecpay_aio_nodejs": "^1.0.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
     "pg": "^8.16.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",

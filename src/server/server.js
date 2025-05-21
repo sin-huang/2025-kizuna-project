@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import authMiddleware from "./middleware/auth.js";
 import * as authController from "./controllers/authControllers.js";
+import ecpayRoutes from './routes/ecpay.js';
 // 這邊也要匯入 dotenv 並 dotenv.config()
 import dotenv from 'dotenv';
 dotenv.config();
@@ -9,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/ecpay', ecpayRoutes);
 
 // API
 app.post("/api/register", authController.register);
