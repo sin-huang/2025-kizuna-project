@@ -18,6 +18,7 @@ const handleLogout = () => {
       <RouterLink to="/" class="p-6 text-lg transition hover:text-gray-300">首頁</RouterLink>
       <RouterLink to="/product" class="p-6 text-lg transition hover:text-gray-300">商品列表</RouterLink>
       <RouterLink to="/cart" class="p-6 text-lg transition hover:text-gray-300">購物車</RouterLink>
+      <RouterLink to="/member" class="p-6 text-lg transition hover:text-gray-300">會員中心</RouterLink>
       <RouterLink to="/subscribe" class="p-6 text-lg transition hover:text-gray-300">訂閱</RouterLink>
       <!-- 有token 代表已經登入 所以只剩登出按鈕 -->
       <template v-if="store.accessToken">

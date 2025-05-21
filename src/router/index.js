@@ -5,6 +5,7 @@ import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import HomeView from "@/views/HomeView.vue";
 import SubscriptionView from "@/views/SubscriptionView.vue";
+import MemberView from "@/views/MemberView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,11 @@ const router = createRouter({
       path: "/subscribe",
       name: "Subscribe",
       component: SubscriptionView,
+    },
+    {
+      path: "/member",
+      name: "Member",
+      component: MemberView,
     },
   ],
 });

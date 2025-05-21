@@ -3,6 +3,7 @@ import cors from "cors";
 import authMiddleware from "./middleware/auth.js";
 import * as authController from "./controllers/authControllers.js";
 import ecpayRoutes from './routes/ecpay.js';
+import memberRoutes from "./routes/member.js";
 // 這邊也要匯入 dotenv 並 dotenv.config()
 import dotenv from 'dotenv';
 dotenv.config();
@@ -11,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api/ecpay', ecpayRoutes);
+app.use("/api/member", memberRoutes);
 
 // API
 app.post("/api/register", authController.register);
@@ -21,6 +23,9 @@ app.post("/api/refresh", authController.refresh);
 app.get("/api/me", authMiddleware, (req, res) => {
   res.json({ message: "驗證成功", user: req.user });
 });
+
+
+
 
 app.listen(3000, () =>
   console.log("✅ Server running on http://localhost:3000")
