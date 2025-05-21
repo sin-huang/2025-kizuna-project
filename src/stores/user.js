@@ -103,8 +103,9 @@ export const useUserStore = defineStore("user", {
       this.username = res.data.username;
 
 
+      
     }catch(error){
-
+      console.error("Google登入失敗", error.message);
     }
   },
 });
