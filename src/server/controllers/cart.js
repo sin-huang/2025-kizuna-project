@@ -1,8 +1,16 @@
-const express = require("express"); //你先拿工具（Express）
-const pool = require("../config/db"); //準備存貨的倉庫（資料庫連線）
-const router = express.Router(); //安排一個店員（路由器）來指引，回傳一個路由器物件
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import pool from "../db.js";
+// 記得 匯入 dotenv !!! 這樣才會成功載入 .env檔案中的環境變數到 process.env裡
+import dotenv from "dotenv";
+import express from "express";
+const cartRouter = express.Router();
+dotenv.config();
 
-router.get("/:userId", async (req, res) => {
+const JWT_SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
+
+cartRouter.get("/:userId", async (req, res) => {
   try {
     let userId = req.params.userId.replace(/[^\d]/g, ""); // 清掉非數字的隱藏字元
     userId = parseInt(userId);
@@ -36,7 +44,7 @@ router.get("/:userId", async (req, res) => {
 });
 
 //新增商品到購物車
-router.post("/:userId", async (req, res) => {
+cartRouter.post("/:userId", async (req, res) => {
   let userId = req.params.userId.replace(/[^\d]/g, "");
   userId = parseInt(userId);
   const { productId, quantity } = req.body;
@@ -95,4 +103,4 @@ router.post("/:userId", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default cartRouter;
