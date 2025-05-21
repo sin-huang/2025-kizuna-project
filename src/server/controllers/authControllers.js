@@ -13,6 +13,7 @@ console.log(`REFRESH_SECRET: ${REFRESH_SECRET}`);
 
 export async function register(req, res) {
   const { username, password } = req.body;
+  // const username = req.body.username;
   const hashed = await bcrypt.hash(password, 10);
   // 正式環境要拿掉raw_password欄位
   try {
@@ -42,14 +43,14 @@ export async function register(req, res) {
 
 export async function login(req, res) {
   const { username, password } = req.body;
-  const result = await pool.query("SELECT * FROM users WHERE username = $1", [
-    username,
-  ]);
-  // debug
-  // console.log(result);
-  const user = result.rows[0];
 
   try {
+    const result = await pool.query("SELECT * FROM users WHERE username = $1", [
+      username,
+    ]);
+    // debug
+    // console.log(result);
+    const user = result.rows[0];
     if (user && (await bcrypt.compare(password, user.password))) {
       const accessToken = jwt.sign(
         { id: user.id, username: user.username },

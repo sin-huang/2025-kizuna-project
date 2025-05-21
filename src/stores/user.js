@@ -7,6 +7,8 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     accessToken: localStorage.getItem("accessToken") || "",
     refreshToken: localStorage.getItem("refeshToken") || "",
+    // 在 state 中定義 username 這樣vue模板才吃得到值
+    username: localStorage.getItem("username") || "",
   }),
   actions: {
     // 註冊
@@ -43,9 +45,13 @@ export const useUserStore = defineStore("user", {
         // console.log(res.data);
         this.accessToken = res.data.accessToken;
         this.refreshToken = res.data.refreshToken;
+        // 把資料寫入 pinia 的 state => 這樣 Vue 模板中的畫面才會 立即更新
+        this.username = username;
 
         localStorage.setItem("accessToken", this.accessToken);
         localStorage.setItem("refreshToken", this.refreshToken);
+        // 在 login() 成功後 順便把 username 記下來
+        localStorage.setItem("username",username);
       } catch (error) {
         if (
           error.response &&
@@ -85,4 +91,21 @@ export const useUserStore = defineStore("user", {
       localStorage.setItem("accessToken", this.accessToken);
     },
   },
+  // 用 Google 登入
+  async loginWithGoogle(idToken){
+    try{
+      const res = await axios.post("/api/auth/google",{idToken});
+
+      // 更新 store 中的各個資料的狀態
+      this.accessToken = res.data.accessToken;
+      this.refreshToken = res.data.refreshToken;
+      // 假設後端有回傳使用者名稱(gmail帳號)
+      this.username = res.data.username;
+
+
+    }catch(error){
+
+    }
+  },
 });
+
