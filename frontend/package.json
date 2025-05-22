@@ -1,8 +1,7 @@
 {
-  "name": "2025-kizuna-project",
+  "name": "2025-kizuna-frontend",
   "version": "1.0.0",
-  "description": "交友軟體Web版",
-  "main": "index.js",
+  "description": "交友軟體Web版(前端)",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -38,17 +37,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "@tailwindcss/vite": "^4.1.6",
-    "2025-kizuna-project": "file:",
     "axios": "^1.9.0",
-    "bcrypt": "^6.0.0",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0",
-    "pg": "^8.16.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"

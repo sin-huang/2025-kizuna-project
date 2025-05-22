@@ -1,9 +1,8 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import passport from "passport";
-import pool from "../db.js";
-// 記得 匯入 dotenv !!! 這樣才會成功載入 .env檔案中的環境變數到 process.env裡
-import dotenv from "dotenv";
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const pool = require("../db.js");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -12,7 +11,7 @@ const REFRESH_SECRET = process.env.REFRESH_SECRET;
 console.log(`JWT_SECRET: ${JWT_SECRET}`);
 console.log(`REFRESH_SECRET: ${REFRESH_SECRET}`);
 
-export async function register(req, res) {
+async function register(req, res) {
   const { username, password } = req.body;
   // const username = req.body.username;
   const hashed = await bcrypt.hash(password, 10);
@@ -42,7 +41,7 @@ export async function register(req, res) {
   }
 }
 
-export async function login(req, res) {
+async function login(req, res) {
   const { username, password } = req.body;
 
   try {
@@ -70,7 +69,7 @@ export async function login(req, res) {
     return res.status(500).json({ message: "登入失敗，請稍後再試" });
   }
 }
-export function refresh(req, res) {
+function refresh(req, res) {
   const { refreshToken } = req.body;
   if (!refreshToken)
     return res.status(401).json({ message: "未帶 refreshToken" });
@@ -89,19 +88,30 @@ export function refresh(req, res) {
 }
 
 // step1 : 導向 Google 登入頁
-export function googleAuth (req, res) {
-  return passport.authenticate("google", { scope: ["email", "profile"] })(req, res)
+function googleAuth(req, res) {
+  return passport.authenticate("google", { scope: ["email", "profile"] })(
+    req,
+    res
+  );
 }
 
 // step2: Google 認證完後 回到這邊
-export function googleAuthCallback (req, res, next) {
+function googleAuthCallback(req, res, next) {
   passport.authenticate("google", { session: false }, (err, user) => {
-    if (err) return next(err)
-    if (!user) return res.redirect("/auth/google") // 沒登入成功就導回去
+    if (err) return next(err);
+    if (!user) return res.redirect("/auth/google"); // 沒登入成功就導回去
 
     // 登入成功：把 user 資料傳到前端
-    const userData = encodeURIComponent(JSON.stringify(user))
+    const userData = encodeURIComponent(JSON.stringify(user));
     // 重新導向哪裡
-    res.redirect(`http://localhost:5173/profile?user=${userData}`)
-  })(req, res, next)
+    res.redirect(`http://localhost:5173/profile?user=${userData}`);
+  })(req, res, next);
 }
+
+module.exports = {
+  register,
+  login,
+  refresh,
+  googleAuth,
+  googleAuthCallback,
+};

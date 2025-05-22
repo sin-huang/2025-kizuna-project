@@ -1,10 +1,10 @@
-import passport from "./passport.js";
-import express from "express";
-import cors from "cors";
-import authMiddleware from "./middleware/auth.js";
-import * as authController from "./controllers/authControllers.js";
-// 這邊也要匯入 dotenv 並 dotenv.config()
-import dotenv from 'dotenv';
+const express = require("express");
+const cors = require("cors");
+const passport = require("./passport.js");
+const dotenv = require("dotenv");
+const authMiddleware = require("./middleware/auth.js");
+const authController = require("./controllers/authControllers.js");
+
 dotenv.config();
 
 const app = express();

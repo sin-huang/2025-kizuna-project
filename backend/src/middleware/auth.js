@@ -1,9 +1,8 @@
-import dotenv from 'dotenv';
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+
 dotenv.config();
 
-import jwt from 'jsonwebtoken';
-
-// 從環境變數中取得密鑰
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = (req, res, next) =>
@@ -22,4 +21,4 @@ const authMiddleware = (req, res, next) =>
     }
 }
 
-export default authMiddleware;
+module.exports = authMiddleware;

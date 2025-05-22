@@ -1,6 +1,6 @@
-import passport from "passport";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import dotenv from "dotenv";
+const passport = require("passport");
+const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
+const dotenv = require("dotenv");
 dotenv.config();
 
 passport.use(
@@ -31,4 +31,4 @@ passport.use(
   )
 );
 
-export default passport;
+module.exports = passport;
