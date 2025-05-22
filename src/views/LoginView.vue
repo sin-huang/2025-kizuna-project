@@ -22,12 +22,16 @@ const handleLogin = async () => {
     alert(`登入失敗 失敗原因：${msg}:${reason}`);
   }
 };
+
+const loginWithGoogle = () => {
+  window.location.href = "http://localhost:3000/auth/google";
+};
 </script>
 
 <template>
   <!-- 在template中 會自動解包 所以存取值不用.value-->
-  <div class="w-[600px] h-[430px] bg-[#C0D7EC] rounded-[20px]">
-    <div class="mx-auto w-[500px] py-5">
+  <div class="w-[600px] h-[450px] bg-[#C0D7EC] bg-opacity-70 rounded-[20px]">
+    <div class="mx-auto w-[500px] py-10">
       <!-- 登入 + 新用戶 -->
       <div class="flex justify-between">
         <h2 class="text-[#3E6588] font-black text-2xl">登入</h2>
@@ -64,7 +68,7 @@ const handleLogin = async () => {
       <a href="#" class="text-center block text-[#3E6588] font-bold text-l"
         >忘記密碼?</a
       >
-      <!-- 第三方登入 -->
+      <!-- 方登入 -->
       <a
         href="#"
         class="block mt-3 w-[500px] p-3 bg-white rounded-[10px]"
@@ -95,7 +99,7 @@ const handleLogin = async () => {
             fill="#1976D2"
           />
         </svg>
-        <span class="text-[#26435c] font-bold w-10/12 text-center">使用 Google 登入</span>
+        <button @click="loginWithGoogle" class="text-[#26435c] font-bold w-10/12 text-center">使用 Google 登入</button>
       </div>
       </a>
     </div>
