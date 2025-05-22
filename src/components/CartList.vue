@@ -6,7 +6,7 @@ const cartStore = useCartStore();
 </script>
 
 <template>
-  <h1 class="text-2xl">購物車</h1>
+  <h1 class="text-2xl">購買禮物</h1>
   <br />
   <div class="grid grid-cols-5 border-b">
     <p class="col-span-2">商品資訊</p>

@@ -13,11 +13,12 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <header class="bg-blue-900 text-white shadow-md">
+  <header class="bg-primary-100 text-white shadow-md flex justify-center">
     <nav class="flex justify-start">
       <RouterLink to="/" class="p-6 text-lg hover:text-gray-300 transition">首頁</RouterLink>
       <RouterLink to="/product" class="p-6 text-lg hover:text-gray-300 transition">商品列表</RouterLink>
       <RouterLink to="/cart" class="p-6 text-lg hover:text-gray-300 transition">購物車</RouterLink>
+      <RouterLink to="/brand" class="p-6 text-lg hover:text-gray-300 transition">品牌</RouterLink>
       <!-- 有token 代表已經登入 所以只剩登出按鈕 -->
       <template v-if="store.accessToken">
         <button @click="handleLogout" class="p-6 text-lg hover:text-gray-300 transition">登出</button>

@@ -4,6 +4,7 @@ import CartView from "@/views/CartView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import HomeView from '@/views/HomeView.vue';
+import BrandView from '@/views/BrandView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,12 @@ const router = createRouter({
       path: '/register',
       name: "Register",
       component: RegisterView,
+    },
+    //轉到品牌頁面
+    {
+      path: '/brand',
+      name: "Rrand",
+      component: BrandView,
     }
   ],
 });
