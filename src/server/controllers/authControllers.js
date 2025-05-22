@@ -14,19 +14,29 @@ console.log(`REFRESH_SECRET: ${REFRESH_SECRET}`);
 export async function register(req, res) {
   const { username, password } = req.body;
   const hashed = await bcrypt.hash(password, 10);
+  // 正式環境要拿掉raw_password欄位
   try {
-    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
-      username,
-      hashed,
-    ]);
+    // 註冊的帳號不能重複 所以先檢查 username 是否已經存在
+    const checkUser = await pool.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+    // 如果已經有相同名稱的帳號名稱
+    if (checkUser.rows.length > 0) {
+      return res.status(400).json({ message: "此帳號已存在，請嘗試其他名稱" });
+    }
+
+    // 有通過檢查才真的把這位使用者帳號密碼加入資料庫
+    await pool.query(
+      "INSERT INTO users (username, password, raw_password) VALUES ($1, $2, $3)",
+      [username, hashed, password]
+    );
     res.json({ message: "註冊成功" });
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "帳號已存在或其他錯誤",
-        reason: error.message || "未知原因",
-      });
+    res.status(400).json({
+      message: "註冊失敗，請稍後再試",
+      reason: error.message || "未知原因",
+    });
   }
 }
 
@@ -35,6 +45,8 @@ export async function login(req, res) {
   const result = await pool.query("SELECT * FROM users WHERE username = $1", [
     username,
   ]);
+  // debug
+  // console.log(result);
   const user = result.rows[0];
 
   try {

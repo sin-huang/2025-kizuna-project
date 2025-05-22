@@ -18,14 +18,14 @@ const handleRegister = async () => {
     return;
   }
 
-  const result = await store.register(username.value, password.value);
+  const res = await store.register(username.value, password.value);
   // debug
-  console.log(result);
-  if (result.success) {
-    alert(result.message || "註冊成功，請登入");
+  console.log(res);
+  if (res.success) {
+    alert(res.message || "註冊成功，請登入");
     router.push("/login"); // 註冊完成後 導回登入頁
   } else {
-    alert(`${result.message}${result.reason ? `\n原因:${result.reason}` : ""}`);
+    alert(`${res.message}${res.reason ? `\n原因:${res.reason}` : ""}`);
   }
 };
 </script>

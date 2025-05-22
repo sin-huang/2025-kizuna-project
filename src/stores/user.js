@@ -39,6 +39,7 @@ export const useUserStore = defineStore("user", {
           username,
           password
         });
+        console.log(res);
         console.log(res.data);
         this.accessToken = res.data.accessToken;
         this.refreshToken = res.data.refreshToken;
