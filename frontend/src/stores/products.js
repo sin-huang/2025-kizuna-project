@@ -10,6 +10,7 @@ export const useProductStore = defineStore("products", () => {
       name: "烏龍奶茶",
       price: 350,
       inventory: 5,
+      description:"輕食沙拉以新鮮、健康、美味為核心，選用當季蔬果、優質蛋白與天然食材，搭配精心調製的醬料，帶來清爽又營養的味蕾享受。無論是忙碌日常的快速餐點，還是追求健康生活的首選，輕食沙拉都能為你注入活力與滿足！"
     },
     // {
     //   id: 2,
