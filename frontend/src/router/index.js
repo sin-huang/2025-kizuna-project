@@ -6,6 +6,7 @@ import RegisterView from "@/views/RegisterView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import ChatRoomView from "@/views/ChatRoomView.vue";
+import ProductDetailView from "@/views/ProductDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,7 +45,13 @@ const router = createRouter({
       path: "/chat",
       name: "ChatRoom",
       component: ChatRoomView,
-    }
+    },
+    // 加入商品詳細頁面route
+    {
+      path: "/productdetail",
+      name: "ProductDetail",
+      component: ProductDetailView,
+    },
   ],
 });
 
