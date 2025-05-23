@@ -4,6 +4,7 @@ const passport = require("./config/passport.js");
 const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
+const ecpayRoutes = require("./routes/ecpay.js");
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.post("/api/login", authController.login);
 app.post("/api/refresh", authController.refresh);
 app.get("/auth/google",authController.googleAuth);
 app.get("/auth/google/callback",authController.googleAuthCallback);
+app.use("/api/ecpay", ecpayRoutes);
 
 // 測試需要 token 的 API
 app.get("/api/me", authMiddleware, (req, res) => {
