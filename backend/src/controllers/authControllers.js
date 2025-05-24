@@ -29,8 +29,8 @@ async function register(req, res) {
 
     // 有通過檢查才真的把這位使用者帳號密碼加入資料庫
     await pool.query(
-      "INSERT INTO users (username, password, raw_password) VALUES ($1, $2, $3)",
-      [username, hashed, password]
+      "INSERT INTO users (username, password) VALUES ($1, $2)",
+      [username, hashed]
     );
     res.json({ message: "註冊成功" });
   } catch (error) {
