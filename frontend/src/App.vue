@@ -18,6 +18,13 @@ const handleLogout = () => {
         >首頁</RouterLink
       >
       <RouterLink
+        to="/member"
+        class="p-6 text-lg transition hover:text-gray-300"
+        v-if="store.accessToken"
+      >
+        會員中心
+      </RouterLink>
+      <RouterLink
         to="/product"
         class="p-6 text-lg transition hover:text-gray-300"
         >商品列表</RouterLink
@@ -33,10 +40,8 @@ const handleLogout = () => {
         >
           登出
         </button>
-        <div
-          class="p-6 text-lg transition hover:text-gray-300"
-        >
-          目前登入帳號為 : 
+        <div class="p-6 text-lg transition hover:text-gray-300">
+          目前登入帳號為 :
           <!-- ml-2表示 margin-left加上0.5rem的間距 -->
           <span class="ml-2">{{ store.username }}</span>
         </div>
