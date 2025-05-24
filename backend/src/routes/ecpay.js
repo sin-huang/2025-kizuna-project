@@ -43,7 +43,7 @@ router.post("/create", authMiddleware, async (req, res) => {
       `INSERT INTO subscriptions (user_id, plan, price, status, MerchantTradeNo)
        VALUES ($1, $2, $3, 'pending', $4)`,
       [userId, plan, price, merchantTradeNo]
-    );//目前沒有真網址回傳/notify 所以status會停在pending
+    );
 
     const form = create.payment_client.aio_check_out_all(
       {
@@ -52,7 +52,7 @@ router.post("/create", authMiddleware, async (req, res) => {
         TotalAmount: price.toString(),
         TradeDesc: "Kizuna 交友訂閱",
         ItemName: `${plan}會員訂閱 x1`,
-        ReturnURL: "http://localhost:3000/api/ecpay/notify",
+        ReturnURL: process.env.ECPAY_RETURN_URL,
         ClientBackURL: "http://localhost:5173/member",
         PaymentType: "aio",
         ChoosePayment: "Credit",
@@ -67,37 +67,40 @@ router.post("/create", authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ 綠界通知（付款成功回傳）目前沒有真實網址無法回傳
-// router.post("/notify", async (req, res) => {
-//   const { MerchantTradeNo, RtnCode, PaymentDate } = req.body;
-//   console.log("📬 綠界通知資料：", req.body);
+// ✅ 綠界通知（付款成功回傳）
+router.post("/notify", async (req, res) => {
+  const { MerchantTradeNo, RtnCode, PaymentDate, TradeNo } = req.body;
+  console.log("📬 綠界通知資料：", req.body);
 
-//   if (RtnCode === "1") {
-//     try {
-//       const result = await pool.query(
-//         `UPDATE subscriptions
-//          SET status = 'paid', paid_at = $1
-//          WHERE MerchantTradeNo = $2
-//          RETURNING user_id, plan`,
-//         [PaymentDate, MerchantTradeNo]
-//       );
+  if (RtnCode === "1") {
+    try {
+      // ✅ 更新 subscriptions：包含 paid_at、trade_no
+      const result = await pool.query(
+        `UPDATE subscriptions
+         SET status = 'paid', paid_at = $1, trade_no = $2
+         WHERE MerchantTradeNo = $3
+         RETURNING user_id, plan`,
+        [PaymentDate, TradeNo, MerchantTradeNo]
+      );
 
-//       const sub = result.rows[0];
+      const sub = result.rows[0];
 
-//       await pool.query(
-//         `UPDATE users SET subscription_plan = $1 WHERE id = $2`,
-//         [sub.plan, sub.user_id]
-//       );
+      // ✅ 同步更新 users.subscription_plan
+      await pool.query(
+        `UPDATE users SET subscription_plan = $1 WHERE id = $2`,
+        [sub.plan, sub.user_id]
+      );
 
-//       console.log("✅ 資料庫更新成功");
-//       res.send("1|OK");
-//     } catch (error) {
-//       console.error("❌ 資料庫更新失敗", error);
-//       res.status(500).send("0|Error: " + error.message);
-//     }
-//   } else {
-//     res.status(400).send("0|交易未成功");
-//   }
-// });
+      console.log("✅ 資料庫更新成功");
+      res.send("1|OK");
+    } catch (error) {
+      console.error("❌ 資料庫更新失敗", error);
+      res.status(500).send("0|Error: " + error.message);
+    }
+  } else {
+    res.status(400).send("0|交易未成功");
+  }
+});
+
 
 module.exports = router;
