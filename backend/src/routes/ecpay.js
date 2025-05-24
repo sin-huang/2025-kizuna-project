@@ -1,4 +1,3 @@
-// backend/routes/ecpay.js
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db.js");
@@ -7,97 +6,98 @@ const ecpay = require("ecpay_aio_nodejs");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// ✅ 綠界參數設定
 const options = {
-  OperationMode: "Stage",
+  OperationMode: "Test", //測試環境是Test不是Stage，正式環境是Production
   MercProfile: {
     MerchantID: process.env.ECPAY_MERCHANT_ID,
     HashKey: process.env.ECPAY_HASH_KEY,
     HashIV: process.env.ECPAY_HASH_IV,
   },
-  IgnorePayment: [],
   IsProjectContractor: false,
+  IgnorePayment: [],
 };
+
 const create = new ecpay(options);
 
-// ✅ 建立訂單並返回 HTML 表單
+// ✅ 時間格式 helper
+function getTaiwanDateTimeString() {
+  const date = new Date();
+  const yyyy = date.getFullYear();
+  const MM = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  const hh = String(date.getHours()).padStart(2, "0");
+  const mm = String(date.getMinutes()).padStart(2, "0");
+  const ss = String(date.getSeconds()).padStart(2, "0");
+  return `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
+}
+
+// ✅ 建立訂單（付款表單）
 router.post("/create", authMiddleware, async (req, res) => {
   const { plan } = req.body;
   const price = plan === "premium" ? 299 : 99;
   const userId = req.user.id;
   const merchantTradeNo = "SUB" + Date.now();
 
-  console.log("🧾 建立訂單:", { userId, plan, merchantTradeNo });
-
   try {
-    // 存入訂閱資料（預設 status = pending）
     await pool.query(
       `INSERT INTO subscriptions (user_id, plan, price, status, MerchantTradeNo)
        VALUES ($1, $2, $3, 'pending', $4)`,
       [userId, plan, price, merchantTradeNo]
+    );//目前沒有真網址回傳/notify 所以status會停在pending
+
+    const form = create.payment_client.aio_check_out_all(
+      {
+        MerchantTradeNo: merchantTradeNo,
+        MerchantTradeDate: getTaiwanDateTimeString(),
+        TotalAmount: price.toString(),
+        TradeDesc: "Kizuna 交友訂閱",
+        ItemName: `${plan}會員訂閱 x1`,
+        ReturnURL: "http://localhost:3000/api/ecpay/notify",
+        ClientBackURL: "http://localhost:5173/member",
+        PaymentType: "aio",
+        ChoosePayment: "Credit",
+        EncryptType: 1,
+        },
     );
 
-    // 建立綠界付款參數
-    const form = create.payment_client.aio_check_out_all({
-      MerchantTradeNo: merchantTradeNo,
-      MerchantTradeDate: new Date().toISOString().slice(0, 19).replace("T", " "),
-      TotalAmount: price,
-      TradeDesc: "Kizuna 交友訂閱",
-      ItemName: `${plan}會員訂閱 x1`,
-      ReturnURL: "http://localhost:3000/api/ecpay/notify",
-      ClientBackURL: "http://localhost:5173/member",
-      ChoosePayment: "Credit",
-      EncryptType: 1,
-    });
-
-    // 回傳付款表單 HTML
-    res.send(form);
+    res.send(form); // ✅ form 是完整 HTML 字串
   } catch (error) {
     console.error("❌ 建立訂單失敗", error);
     res.status(500).json({ message: "訂單建立失敗", reason: error.message });
   }
 });
 
+// ✅ 綠界通知（付款成功回傳）目前沒有真實網址無法回傳
+// router.post("/notify", async (req, res) => {
+//   const { MerchantTradeNo, RtnCode, PaymentDate } = req.body;
+//   console.log("📬 綠界通知資料：", req.body);
 
-// ✅ 綠界通知付款成功（伺服器專用）
-router.post("/notify", async (req, res) => {
-  const data = req.body;
-  console.log("📬 ㄋ綠界通知資料：", data);
+//   if (RtnCode === "1") {
+//     try {
+//       const result = await pool.query(
+//         `UPDATE subscriptions
+//          SET status = 'paid', paid_at = $1
+//          WHERE MerchantTradeNo = $2
+//          RETURNING user_id, plan`,
+//         [PaymentDate, MerchantTradeNo]
+//       );
 
-  const { MerchantTradeNo, RtnCode, PaymentDate } = data;
+//       const sub = result.rows[0];
 
-  // ✅ 綠界付款成功才處理（RtnCode: 1 表示成功）
-  if (RtnCode === "1") {
-    try {
-      const result = await pool.query(
-        `UPDATE subscriptions
-         SET status = 'paid', paid_at = $1
-         WHERE MerchantTradeNo = $2
-         RETURNING user_id, plan`,
-        [PaymentDate, MerchantTradeNo]
-      );
+//       await pool.query(
+//         `UPDATE users SET subscription_plan = $1 WHERE id = $2`,
+//         [sub.plan, sub.user_id]
+//       );
 
-      const subscription = result.rows[0];
-
-      // ✅ 同時更新會員狀態
-      await pool.query(
-        `UPDATE users
-         SET subscription_plan = $1
-         WHERE id = $2`,
-        [subscription.plan, subscription.user_id]
-      );
-
-      console.log("✅ 資料庫更新成功");
-
-      // ✅ 必須回傳 200 且字串 "1|OK"
-      res.send("1|OK");
-    } catch (error) {
-      console.error("❌ 資料庫更新失敗", error);
-      res.status(500).send("0|Error: " + error.message);
-    }
-  } else {
-    res.status(400).send("0|交易未成功");
-  }
-});
+//       console.log("✅ 資料庫更新成功");
+//       res.send("1|OK");
+//     } catch (error) {
+//       console.error("❌ 資料庫更新失敗", error);
+//       res.status(500).send("0|Error: " + error.message);
+//     }
+//   } else {
+//     res.status(400).send("0|交易未成功");
+//   }
+// });
 
 module.exports = router;

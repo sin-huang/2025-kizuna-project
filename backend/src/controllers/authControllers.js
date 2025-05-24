@@ -55,7 +55,7 @@ async function login(req, res) {
       const accessToken = jwt.sign(
         { id: user.id, username: user.username },
         JWT_SECRET,
-        { expiresIn: "15m" }
+        { expiresIn: "2d" }
       );
       const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, {
         expiresIn: "7d",
@@ -77,7 +77,7 @@ function refresh(req, res) {
   try {
     const decoded = jwt.verify(refreshToken, REFRESH_SECRET);
     const newAccessToken = jwt.sign({ id: decoded.id }, JWT_SECRET, {
-      expiresIn: "15m",
+      expiresIn: "2d",
     });
     res.json({ accessToken: newAccessToken });
   } catch (error) {
