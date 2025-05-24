@@ -70,11 +70,11 @@ router.post("/create", authMiddleware, async (req, res) => {
 // ✅ 綠界通知（付款成功回傳）
 router.post("/notify", async (req, res) => {
   const { MerchantTradeNo, RtnCode, PaymentDate, TradeNo } = req.body;
-  console.log("📬 綠界通知資料：", req.body);
+  // console.log("📬 綠界通知資料：", req.body);
 
   if (RtnCode === "1") {
     try {
-      // ✅ 更新 subscriptions：包含 paid_at、trade_no
+      // ✅ 更新 subscriptions
       const result = await pool.query(
         `UPDATE subscriptions
          SET status = 'paid', paid_at = $1, trade_no = $2
@@ -85,13 +85,13 @@ router.post("/notify", async (req, res) => {
 
       const sub = result.rows[0];
 
-      // ✅ 同步更新 users.subscription_plan
+      // ✅ 同步更新 users
       await pool.query(
         `UPDATE users SET subscription_plan = $1 WHERE id = $2`,
         [sub.plan, sub.user_id]
       );
 
-      console.log("✅ 資料庫更新成功");
+      // console.log("✅ 資料庫更新成功");
       res.send("1|OK");
     } catch (error) {
       console.error("❌ 資料庫更新失敗", error);
