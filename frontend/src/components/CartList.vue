@@ -1,8 +1,20 @@
 <script setup>
+import axios from 'axios';
 import CartCard from "@/components/CartCard.vue";
 import { useCartStore } from "@/stores/cart.js";
 const cartStore = useCartStore();
 //解構出來的東西不是響應式
+
+const submitCart = async()=>{
+  try{
+    const res = await axios.post('http://localhost:3000/api/cart',cartStore.cartItems)
+    // console.log(res.data.message)
+    alert('傳送成功')
+  } catch(err) {
+    console.log(err);
+    alert('傳送失敗')
+  }
+}
 </script>
 
 <template>
@@ -25,6 +37,7 @@ const cartStore = useCartStore();
         清空購物車
       </button>
       <p>總計: {{ cartStore.totalPrice }} 元</p>
+      <button @click="submitCart">送出購物車資料到前端</button>
     </div>
   </div>
   <div v-else>
