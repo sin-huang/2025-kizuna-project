@@ -6,7 +6,7 @@ export const useUserStore = defineStore("user", {
   // 初始化 從 localStorage 中拿出儲存的 token (如果有的話)
   state: () => ({
     accessToken: localStorage.getItem("accessToken") || "",
-    refreshToken: localStorage.getItem("refeshToken") || "",
+    refreshToken: localStorage.getItem("refreshToken") || "",
     // 在 state 中定義 username 這樣vue模板才吃得到值
     username: localStorage.getItem("username") || "",
   }),
@@ -39,7 +39,7 @@ export const useUserStore = defineStore("user", {
       try {
         const res = await axios.post("/api/login", {
           username,
-          password
+          password,
         });
         // console.log(res);
         // console.log(res.data);
@@ -51,7 +51,7 @@ export const useUserStore = defineStore("user", {
         localStorage.setItem("accessToken", this.accessToken);
         localStorage.setItem("refreshToken", this.refreshToken);
         // 在 login() 成功後 順便把 username 記下來
-        localStorage.setItem("username",username);
+        localStorage.setItem("username", username);
       } catch (error) {
         if (
           error.response &&
@@ -92,21 +92,17 @@ export const useUserStore = defineStore("user", {
     },
   },
   // 用 Google 登入
-  async loginWithGoogle(idToken){
-    try{
-      const res = await axios.post("/api/auth/google",{idToken});
+  async loginWithGoogle(idToken) {
+    try {
+      const res = await axios.post("/api/auth/google", { idToken });
 
       // 更新 store 中的各個資料的狀態
       this.accessToken = res.data.accessToken;
       this.refreshToken = res.data.refreshToken;
       // 假設後端有回傳使用者名稱(gmail帳號)
       this.username = res.data.username;
-
-
-      
-    }catch(error){
+    } catch (error) {
       console.error("Google登入失敗", error.message);
     }
   },
 });
-
