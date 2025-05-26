@@ -1,5 +1,5 @@
 
-# 2025-kizuna-project ( 交友軟體Web版 )
+# kizuna-project ( 交友軟體 )
 
 ## 目前使用套件
 
