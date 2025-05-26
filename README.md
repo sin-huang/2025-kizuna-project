@@ -1,5 +1,6 @@
 
 # kizuna-project ( 交友軟體 )
+  kizuna 在 日語 中 是 羈絆 的意思
 
 ## 目前使用套件
 
