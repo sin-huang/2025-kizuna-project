@@ -5,18 +5,12 @@
 
 * 前端
   * `vue`
-  * `axios`
   * `pinia`
   * `tailwindcss`
-  * `vite`
-  * `socket.io-client`
     
 * 後端
-  * `nodemon`
   * `bcrypt`
   * `cookie-parser`
-  * `cors`
-  * `dotenv`
   * `express`
   * `jsonwebtoken`
   * `passport`
