@@ -7,6 +7,7 @@ import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import SubscriptionView from "@/views/SubscriptionView.vue";
 import MemberView from "@/views/MemberView.vue";
+import ChatRoomView from "@/views/ChatRoomView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,13 +32,11 @@ const router = createRouter({
       name: "Cart",
       component: CartView,
     },
-    // 加入登入頁面route
     {
       path: "/login",
       name: "Login",
       component: LoginView,
-    },
-    // 加入註冊頁面route
+    }, 
     {
       path: "/register",
       name: "Register",
@@ -53,6 +52,11 @@ const router = createRouter({
       name: "Member",
       component: MemberView,
     },
+    {
+      path: "/chat",
+      name: "ChatRoom",
+      component: ChatRoomView,
+    }
   ],
 });
 
