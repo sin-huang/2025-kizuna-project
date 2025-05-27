@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "@/stores/user";
+
 import ProductView from "@/views/ProductView.vue";
 import CartView from "@/views/CartView.vue";
 import LoginView from "@/views/LoginView.vue";
@@ -6,7 +8,7 @@ import RegisterView from "@/views/RegisterView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import EditProfileView from "../views/EditProfileView.vue";
-// import TestView from "../views/TestView.vue";
+import MatchView from "../views/MatchView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,11 +45,17 @@ const router = createRouter({
       name: "Register",
       component: RegisterView,
     },
-    // 加入編輯個人檔案頁面route
+    // 加入編輯個人檔案頁面route 並標記此為限制訪問
     {
       path: "/edit-profile",
       name: "EditProfile",
       component: EditProfileView,
+    },
+    // 加入滑滑區頁面route
+    {
+      path: "/match",
+      name: "Match",
+      component: MatchView,
     },
   ],
 });
