@@ -53,6 +53,10 @@ const handleLogout = () => {
           class="p-6 text-lg transition hover:text-gray-300"
           >註冊</RouterLink
         >
+        <RouterLink
+          to="/matchResult"
+          class="p-6 text-lg transition hover:text-gray-300"
+          >篩選邏輯測試</RouterLink>
       </template>
     </nav>
   </header>

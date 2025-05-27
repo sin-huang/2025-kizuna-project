@@ -5,6 +5,7 @@ import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import HomeView from '@/views/HomeView.vue';
 import ProfileView from "@/views/ProfileView.vue";
+import MatchResultView from "@/views/MatchResultView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,7 +41,13 @@ const router = createRouter({
       path: '/register',
       name: "Register",
       component: RegisterView,
-    }
+    },
+    // 篩選顯示頁面
+    {
+      path: "/matchResult",
+      name: "MatchResult",
+      component: MatchResultView,
+    },
   ],
 });
 
