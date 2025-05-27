@@ -1,5 +1,4 @@
 <script setup>
-import { brandproductStore } from "@/stores/brand.js";
 import { useCartStore } from "@/stores/cart.js";
 
 const brandproductStore = useBrandProductStore();

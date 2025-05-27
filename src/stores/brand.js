@@ -6,7 +6,7 @@ export const useBrandStore = defineStore("products", () => {
     {
       id: 1,
       img: "https://lcp-prod-obs.line-scdn.net/0hB0cYFDAAHR9eIA3Q1u9iSA19EW5tURkXN1gAInplPHAITAkVNA4CDwxpP3NzUTERCQ0zHzpmPHcYETsvAhoHHHppKEoYVDEsOx8CJTlrPGQDWSEVOE4uCQ/f300",
-      name: "響泰多 輕食沙拉",
+      name: "烏龍奶茶",
       price: 350,
       inventory: 5,
     },

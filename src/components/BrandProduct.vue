@@ -22,7 +22,7 @@ const { products } = productStore;
        </div>
     </div>
 
-  <h2 class="text-2xl">人氣推薦</h2>
+  <h2 class="text-2xl py-5">人氣推薦</h2>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <ProductCard
@@ -32,7 +32,7 @@ const { products } = productStore;
     />
     <!-- 記得可以直接傳物件 -->
   </div>
-    <h2 class="text-2xl">全部商品</h2>
+    <h2 class="text-2xl py-5">全部商品</h2>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <ProductCard

@@ -12,7 +12,7 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <header class="text-white bg-blue-900 shadow-md">
+  <header class="text-white bg-primary-100 shadow-md">
     <nav class="flex justify-start">
       <RouterLink to="/" class="p-6 text-lg transition hover:text-gray-300"
         >首頁</RouterLink
@@ -25,7 +25,6 @@ const handleLogout = () => {
       <RouterLink to="/cart" class="p-6 text-lg transition hover:text-gray-300"
         >購物車</RouterLink
       >
-      <RouterLink to="/brand" class="p-6 text-lg hover:text-gray-300 transition">品牌</RouterLink>
       <!-- 有token 代表已經登入 所以只剩登出按鈕 -->
       <template v-if="store.accessToken">
         <button

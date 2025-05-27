@@ -42,10 +42,10 @@ const router = createRouter({
       name: "Register",
       component: RegisterView,
     },
-    //轉到品牌頁面
+    
     {
-      path: '/brand',
-      name: "Rrand",
+      path: '/brand/:id',
+      name: "Brand",
       component: BrandView,
     }
   ],

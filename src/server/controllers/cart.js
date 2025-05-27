@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import pool from "../db.js";
 // 記得 匯入 dotenv !!! 這樣才會成功載入 .env檔案中的環境變數到 process.env裡
