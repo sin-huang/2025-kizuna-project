@@ -5,13 +5,18 @@ const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
 const matchController = require("./controllers/matchController.js");
-
+const pool = require("./config/db.js");
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  req.db = pool;
+  next();
+});
 
 // app.use(passport.initialize());
 
