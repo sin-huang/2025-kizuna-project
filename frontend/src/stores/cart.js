@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useProductStore } from "@/stores/products.js";
+import axios from "axios";
 
 export const useCartStore = defineStore("cart", () => {
-  // 來自商品列表的 store，要寫在裡面!!!!
   const productStore = useProductStore();
-
   const cartItems = ref([]);
   // { id: 1, name: '機械鍵盤', price: 2999, quantity: 1 }
 
@@ -23,26 +22,41 @@ export const useCartStore = defineStore("cart", () => {
   });
 
   // 加入商品到購物車
-  const addCart = (product) => {
-    const existingItem = cartItems.value.find((item) => item.id === product.id);
+  const addCart = async (product) => {
+    try {
+      //1.更新前端畫面
+      const existingItem = cartItems.value.find(
+        (item) => item.id === product.id
+      );
 
-    if (existingItem) {
-      existingItem.quantity++;
-    } else {
-      cartItems.value.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.value.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+        });
+      }
+
+      //更新商品庫存 用id去找對應的東西
+      productStore.decreaseInventory(product.id);
+
+      //2.發送api到後端
+      const resp = await axios.post("http://localhost:3000/api/cart", {
+        productId: product.id,
         quantity: 1,
+        //如果需要，也可帶上 userId 或使用 token 驗證
       });
+      console.log("成功加入購物車：", resp.data);
+    } catch {
+      console.error("加入購物車失敗：", error);
     }
-
-    //更新商品庫存 用id去找對應的東西
-    productStore.decreaseInventory(product.id);
   };
 
   //從購物車移除商品(用findIndex，因為不知道要刪第幾個)
-  const removeFromCart = (itemId) => {
+  const removeFromCart = async (itemId) => {
     const index = cartItems.value.findIndex((item) => item.id === itemId);
     // 有找到
     if (index > -1) {
@@ -55,14 +69,21 @@ export const useCartStore = defineStore("cart", () => {
         productStore.increaseInventory(itemId);
       }
     }
+
+    try {
+      const resp=await axios.delete(`http://localhost:3000/api/cart/${itemId}`);
+      console.log(resp.data); 
+    } catch (error) {
+      console.log("刪除購物車項目失敗", error);
+    }
     cartItems.value.splice(index, 1);
-    //從index這邊刪掉1筆資料
+    //前端同步刪除，從index這邊刪掉1筆資料
   };
 
   //更新購物車商品數量
   //id是唯一的，用id去找對應的物件
   //newQuantity是指購物車數量變化顯示出來的值，但實際值尚未更新
-  const updateQuantity = (itemId, newQuantity) => {
+  const updateQuantity = async (itemId, newQuantity) => {
     const item = cartItems.value.find((item) => item.id === itemId);
 
     if (item) {
@@ -84,23 +105,40 @@ export const useCartStore = defineStore("cart", () => {
           productStore.increaseInventory(itemId);
         }
       }
+
+      //呼叫後端API更新數量
+      try{
+        const resp=await axios.patch(`http://localhost:3000/api/cart/${itemId}`,{
+          quantity: newQuantity
+        })
+        console.log(resp.data); 
+      } catch(err) {
+        console.log('更新購物車數量失敗',err)
+      }
     }
   };
 
   //清空購物車
-  const clearCart = () => {
-    //恢復所有商品的庫存
+  const clearCart = async () => {
 
-    //先把單個商品抓出來
-    cartItems.value.forEach((item) => {
+    //清空資料
+    cartItems.value = [];
+    try {
+      const resp=await axios.delete("http://localhost:3000/api/cart");
+      //恢復所有商品的庫存，先把單個商品抓出來
+      cartItems.value.forEach((item) => {
       //單個商品數量有幾個就跑幾次迴圈，把庫存加回來
       for (let i = 0; i < item.quantity; i++) {
         productStore.increaseInventory(item.id);
       }
     });
-    //清空資料
-    cartItems.value = [];
+    console.log(resp.data); 
+    } catch (error) {
+      console.log("清空購物車失敗")
+    }
+    
   };
+
   return {
     cartItems,
     totalPrice,
