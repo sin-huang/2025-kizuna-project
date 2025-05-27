@@ -4,9 +4,15 @@
   "description": "kizuna(backend)",
   "main": "server.js",
   "scripts": {
+<<<<<<< HEAD
     "dev": "nodemon src/server.js",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
+=======
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "dev": "node src/server.js"
+>>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
   },
   "repository": {
     "type": "git",
@@ -22,7 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@eslint/json": "^0.12.0",
-    "drizzle-kit": "^0.18.1",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9.26.0",
     "eslint-plugin-vue": "^10.1.0"
   },

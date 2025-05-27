@@ -1,20 +1,27 @@
 <script setup>
-import axios from 'axios';
+import axios from "axios";
 import CartCard from "@/components/CartCard.vue";
 import { useCartStore } from "@/stores/cart.js";
 const cartStore = useCartStore();
 //解構出來的東西不是響應式
 
-const submitCart = async()=>{
-  try{
-    const res = await axios.post('http://localhost:3000/api/cart',cartStore.cartItems)
+const submitCart = async () => {
+  try {
+    const res = await axios.post("/api/cart", {
+      user_id: 1,
+      username: "wenyu",
+      products: [
+        { id: 1, name: "烏龍奶茶", price: 350, quantity: 2 },
+        { id: 2, name: "珍珠奶茶", price: 400, quantity: 1 },
+      ],
+    });
     // console.log(res.data.message)
-    alert('傳送成功')
-  } catch(err) {
+    alert("傳送成功");
+  } catch (err) {
     console.log(err);
-    alert('傳送失敗')
+    alert("傳送失敗");
   }
-}
+};
 </script>
 
 <template>

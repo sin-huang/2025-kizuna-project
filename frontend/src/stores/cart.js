@@ -23,36 +23,42 @@ export const useCartStore = defineStore("cart", () => {
 
   // 加入商品到購物車
   const addCart = async (product) => {
-    try {
-      //1.更新前端畫面
-      const existingItem = cartItems.value.find(
-        (item) => item.id === product.id
-      );
+    cartItems.value.push(product);
+    console.log(cartItems.value);
+    // try {
+    //   //1.更新前端畫面
+    //   const existingItem = cartItems.value.find(
+    //     (item) => item.id === product.id
+    //   );
 
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cartItems.value.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          quantity: 1,
-        });
-      }
+    //   if (existingItem) {
+    //     existingItem.quantity++;
+    //   } else {
+    //     cartItems.value.push({
+    //       id: product.id,
+    //       name: product.name,
+    //       price: product.price,
+    //       quantity: 1,
+    //     });
+    //   }
 
-      //更新商品庫存 用id去找對應的東西
-      productStore.decreaseInventory(product.id);
+    //   //更新商品庫存 用id去找對應的東西
+    //   productStore.decreaseInventory(product.id);
 
-      //2.發送api到後端
+    //   //2.發送api到後端
+    // console.log(cartItems.value[0].id);
       const resp = await axios.post("http://localhost:3000/api/cart", {
-        productId: product.id,
+        user_id:1,
+        username:localStorage.getItem('username'),
+        productId: cartItems.value[0],
         quantity: 1,
+        createAt:Date.now()
         //如果需要，也可帶上 userId 或使用 token 驗證
       });
-      console.log("成功加入購物車：", resp.data);
-    } catch {
-      console.error("加入購物車失敗：", error);
-    }
+    //   console.log("成功加入購物車：", resp.data);
+    // } catch(error) {
+    //   console.error("加入購物車失敗：", error);
+    // }
   };
 
   //從購物車移除商品(用findIndex，因為不知道要刪第幾個)
@@ -71,8 +77,10 @@ export const useCartStore = defineStore("cart", () => {
     }
 
     try {
-      const resp=await axios.delete(`http://localhost:3000/api/cart/${itemId}`);
-      console.log(resp.data); 
+      const resp = await axios.delete(
+        `http://localhost:3000/api/cart/${itemId}`
+      );
+      console.log(resp.data);
     } catch (error) {
       console.log("刪除購物車項目失敗", error);
     }
@@ -107,36 +115,37 @@ export const useCartStore = defineStore("cart", () => {
       }
 
       //呼叫後端API更新數量
-      try{
-        const resp=await axios.patch(`http://localhost:3000/api/cart/${itemId}`,{
-          quantity: newQuantity
-        })
-        console.log(resp.data); 
-      } catch(err) {
-        console.log('更新購物車數量失敗',err)
+      try {
+        const resp = await axios.patch(
+          `http://localhost:3000/api/cart/${itemId}`,
+          {
+            quantity: newQuantity,
+          }
+        );
+        console.log(resp.data);
+      } catch (err) {
+        console.log("更新購物車數量失敗", err);
       }
     }
   };
 
   //清空購物車
   const clearCart = async () => {
-
     //清空資料
     cartItems.value = [];
     try {
-      const resp=await axios.delete("http://localhost:3000/api/cart");
+      const resp = await axios.delete("http://localhost:3000/api/cart");
       //恢復所有商品的庫存，先把單個商品抓出來
       cartItems.value.forEach((item) => {
-      //單個商品數量有幾個就跑幾次迴圈，把庫存加回來
-      for (let i = 0; i < item.quantity; i++) {
-        productStore.increaseInventory(item.id);
-      }
-    });
-    console.log(resp.data); 
+        //單個商品數量有幾個就跑幾次迴圈，把庫存加回來
+        for (let i = 0; i < item.quantity; i++) {
+          productStore.increaseInventory(item.id);
+        }
+      });
+      console.log(resp.data);
     } catch (error) {
-      console.log("清空購物車失敗")
+      console.log("清空購物車失敗");
     }
-    
   };
 
   return {

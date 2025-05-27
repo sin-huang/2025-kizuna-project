@@ -1,9 +1,14 @@
 {
+<<<<<<< HEAD
   "id": "35ec532d-aa16-4040-a46d-8b05701cc327",
+=======
+  "id": "45805d87-b1c3-4d55-97d5-e14aff8ed465",
+>>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+<<<<<<< HEAD
     "public.users": {
       "name": "users",
       "schema": "",
@@ -22,10 +27,25 @@
         },
         "password": {
           "name": "password",
+=======
+    "public.user_cart_summary": {
+      "name": "user_cart_summary",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+>>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
+<<<<<<< HEAD
         "raw_password": {
           "name": "raw_password",
           "type": "varchar(20)",
@@ -66,6 +86,11 @@
         "content": {
           "name": "content",
           "type": "varchar(255)",
+=======
+        "products": {
+          "name": "products",
+          "type": "jsonb",
+>>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
           "primaryKey": false,
           "notNull": true
         },
@@ -73,7 +98,11 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
+<<<<<<< HEAD
           "notNull": true,
+=======
+          "notNull": false,
+>>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
           "default": "now()"
         }
       },
