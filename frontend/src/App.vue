@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from "vue-router";
 import { useUserStore } from "./stores/user";
 import router from "./router";
+import Header from "@/components/Header.vue"
 const store = useUserStore();
 
 const handleLogout = () => {
@@ -14,6 +15,8 @@ const handleLogout = () => {
 <template>
   <header class="text-white shadow-md bg-primary-100">
     <nav class="flex justify-start">
+      <div class="p-6 text-2xl italic font-light">Kizuna</div>
+      
       <RouterLink to="/" class="p-6 text-lg transition hover:text-gray-300"
         >首頁</RouterLink
       >
@@ -25,7 +28,7 @@ const handleLogout = () => {
       <RouterLink to="/cart" class="p-6 text-lg transition hover:text-gray-300"
         >購物車</RouterLink
       >
-      <!-- 有token 代表已經登入 所以只剩登出按鈕 -->
+      
       <template v-if="store.accessToken">
         <button
           @click="handleLogout"
@@ -72,7 +75,7 @@ const handleLogout = () => {
   </header>
   <main class="max-w-[1000px] mx-auto mt-24">
     <RouterView />
-  </main>
+  </main>  -->
 </template>
 
 <style></style>
