@@ -25,43 +25,44 @@ export const useCartStore = defineStore("cart", () => {
     cartItems.value.push(product);
     console.log(cartItems.value);
     try {
-    //   //1.更新前端畫面
-    //   const existingItem = cartItems.value.find(
-    //     (item) => item.id === product.id
-    //   );
+      //1.更新前端畫面
+      const existingItem = cartItems.value.find(
+        (item) => item.id === product.id
+      );
 
-    //   if (existingItem) {
-    //     existingItem.quantity++;
-    //   } else {
-    //     cartItems.value.push({
-    //       id: product.id,
-    //       name: product.name,
-    //       price: product.price,
-    //       quantity: 1,
-    //     });
-    //   }
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.value.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+        });
+      }
 
-    //   //更新商品庫存 用id去找對應的東西
-    //   productStore.decreaseInventory(product.id);
+      //更新商品庫存 用id去找對應的東西
+      productStore.decreaseInventory(product.id);
 
-    //   //2.發送api到後端
-    // console.log(cartItems.value[0].id);
-    const resp = await axios.post("http://localhost:3000/api/cart", {
-      user_id: 2,
-      username: localStorage.getItem("username"),
-      productId: cartItems.value[0],
-      quantity: 1,
-      createAt: Date.now(),
-    });
+      //   //2.發送api到後端
+      // console.log(cartItems.value[0].id);
+      const resp = await axios.post("http://localhost:3000/api/cart", {
+        user_id: 2,
+        username: localStorage.getItem("username"),
+        productId: cartItems.value[0],
+        quantity: 1,
+        createAt: Date.now(),
+      });
 
       console.log("成功加入購物車：", resp.data);
-    } catch(error) {
+    } catch (error) {
       console.error("加入購物車失敗：", error);
     }
   };
 
   //從購物車移除商品(用findIndex，因為不知道要刪第幾個)
   const removeFromCart = async (itemId) => {
+    // console.log(itemId);
     const index = cartItems.value.findIndex((item) => item.id === itemId);
     // 有找到
     if (index > -1) {
@@ -75,16 +76,9 @@ export const useCartStore = defineStore("cart", () => {
       }
     }
 
-    try {
-      const resp = await axios.delete(
-        `http://localhost:3000/api/cart/${itemId}`
-      );
-      console.log(resp.data);
-    } catch (error) {
-      console.log("刪除購物車項目失敗", error);
-    }
     cartItems.value.splice(index, 1);
     //前端同步刪除，從index這邊刪掉1筆資料
+
   };
 
   //更新購物車商品數量
@@ -113,18 +107,7 @@ export const useCartStore = defineStore("cart", () => {
         }
       }
 
-      //呼叫後端API更新數量
-      try {
-        const resp = await axios.patch(
-          `http://localhost:3000/api/cart/${itemId}`,
-          {
-            quantity: newQuantity,
-          }
-        );
-        console.log(resp.data);
-      } catch (err) {
-        console.log("更新購物車數量失敗", err);
-      }
+      
     }
   };
 
