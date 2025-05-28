@@ -6,9 +6,8 @@ import axios from "axios";
 export const useCartStore = defineStore("cart", () => {
   const productStore = useProductStore();
   const cartItems = ref([]);
-  // { id: 1, name: '機械鍵盤', price: 2999, quantity: 1 }
 
-  // 計算商品總價 記得寫0和computed
+  // 計算商品總價
   const totalPrice = computed(() => {
     return cartItems.value.reduce(
       (sum, item) => sum + item.price * item.quantity,
@@ -25,7 +24,7 @@ export const useCartStore = defineStore("cart", () => {
   const addCart = async (product) => {
     cartItems.value.push(product);
     console.log(cartItems.value);
-    // try {
+    try {
     //   //1.更新前端畫面
     //   const existingItem = cartItems.value.find(
     //     (item) => item.id === product.id
@@ -47,18 +46,18 @@ export const useCartStore = defineStore("cart", () => {
 
     //   //2.發送api到後端
     // console.log(cartItems.value[0].id);
-      const resp = await axios.post("http://localhost:3000/api/cart", {
-        user_id:1,
-        username:localStorage.getItem('username'),
-        productId: cartItems.value[0],
-        quantity: 1,
-        createAt:Date.now()
-        //如果需要，也可帶上 userId 或使用 token 驗證
-      });
-    //   console.log("成功加入購物車：", resp.data);
-    // } catch(error) {
-    //   console.error("加入購物車失敗：", error);
-    // }
+    const resp = await axios.post("http://localhost:3000/api/cart", {
+      user_id: 2,
+      username: localStorage.getItem("username"),
+      productId: cartItems.value[0],
+      quantity: 1,
+      createAt: Date.now(),
+    });
+
+      console.log("成功加入購物車：", resp.data);
+    } catch(error) {
+      console.error("加入購物車失敗：", error);
+    }
   };
 
   //從購物車移除商品(用findIndex，因為不知道要刪第幾個)

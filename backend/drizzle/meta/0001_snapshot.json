@@ -1,6 +1,6 @@
 {
-  "id": "e68252f9-e0dd-4a03-a818-50bb81b304c3",
-  "prevId": "35ec532d-aa16-4040-a46d-8b05701cc327",
+  "id": "fd821b48-69e2-435b-a03f-91c42583a19a",
+  "prevId": "87f40cec-8ca3-47ff-ae8c-9c56e4972b92",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -74,6 +74,50 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user_cart_summary": {
+      "name": "user_cart_summary",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "products": {
+          "name": "products",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
           "default": "now()"
         }
       },

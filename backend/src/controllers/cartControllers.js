@@ -1,11 +1,11 @@
 const db = require("../config/db.js");
 const { userCartSummary } = require("../models/schema.js");
-const { eq } = require("drizzle-orm"); 
+const { eq } = require("drizzle-orm");
 
 let cart = [];
 
 const submitCart = async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   const { user_id, username, productId, quantity, createAt } = req.body;
   console.log(user_id, username, productId, quantity, createAt);
 
@@ -19,13 +19,15 @@ const submitCart = async (req, res) => {
     if (existing.length > 0) {
       await db
         .update(userCartSummary)
-        .set({ products: products })
+        .set({ products: productId })
         .where(eq(userCartSummary.user_id, user_id));
+
+      res.status(200).json({ message: "購物車更新成功" });
     } else {
       await db.insert(userCartSummary).values({
-        user_id:user_id,
-        username:username,
-        products:productId,
+        user_id: user_id,
+        username: username,
+        products: productId,
       });
 
       res.status(200).json({ message: "購物車寫入成功" });

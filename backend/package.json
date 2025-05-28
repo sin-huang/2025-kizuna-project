@@ -4,15 +4,9 @@
   "description": "kizuna(backend)",
   "main": "server.js",
   "scripts": {
-<<<<<<< HEAD
     "dev": "nodemon src/server.js",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
-=======
-    "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate",
-    "dev": "node src/server.js"
->>>>>>> cdd2863 (fix: drizzle, frontend api, backend)
   },
   "repository": {
     "type": "git",
@@ -38,10 +32,6 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-<<<<<<< HEAD
-    "drizzle-kit": "^0.31.1",
-=======
->>>>>>> 12cc9e2 (feat: add connect cart.js API to backend cartControllers logic)
     "drizzle-orm": "^0.43.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",

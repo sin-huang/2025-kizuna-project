@@ -4,15 +4,12 @@ const passport = require("./config/passport.js");
 const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
-<<<<<<< HEAD
 // 以下為即時聊天室新增模組
 const http = require("http");
 const { Server } = require("socket.io");
 const setupSocket = require("./controllers/chatControllers.js");
 
-=======
 const cartRoutes=require("./routes/cartRoutes.js")
->>>>>>> 12cc9e2 (feat: add connect cart.js API to backend cartControllers logic)
 dotenv.config();
 
 const app = express();
@@ -23,10 +20,6 @@ const io = new Server(server, {cors:{origin:"*"}});
 app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
-<<<<<<< HEAD
-=======
-// 掛載購物車路由
->>>>>>> 12cc9e2 (feat: add connect cart.js API to backend cartControllers logic)
 
 // API 在這設定前端打什麼 後端去執行哪個方法
 app.post("/auth/register", authController.register);
