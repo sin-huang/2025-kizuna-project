@@ -26,7 +26,16 @@ const messagesTable = pgTable("messages", {
   created_at: timestamp().defaultNow().notNull(),
 });
 
+//上傳照片
+const photosTable = pgTable("photos", {
+  id: serial("id").primaryKey(),
+  image_url: varchar("image_url", { length: 255 }),
+  image_key: varchar("image_key", { length: 255 }),
+  uploaded_at: timestamp("uploaded_at").defaultNow(),
+});
+
 module.exports = {
   usersTable,
-  messagesTable
-}
+  messagesTable,
+  photosTable,
+};
