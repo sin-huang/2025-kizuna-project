@@ -59,7 +59,7 @@ const scrollRight = () => {
 </script>
 
 <template>
-  <section class="py-16">
+  <section class="py-12">
     <div class="mb-8 text-center">
       <p class="mb-4 text-gray-600">Your weekend starts here</p>
       <h2 class="mb-4 text-2xl font-bold md:text-3xl">最新聚會</h2>

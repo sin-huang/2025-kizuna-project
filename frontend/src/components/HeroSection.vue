@@ -1,18 +1,50 @@
+<script setup>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
+
+const slides = [
+  "/hero.jpg",
+  "/hero2.jpg",
+  "/hero3.jpg",
+  "/hero4.jpg",
+  "/hero5.jpg",
+  "/hero6.jpg",
+];
+</script>
+
 <template>
   <section class="relative w-full h-screen overflow-hidden">
-    <!-- 背景圖 -->
-    <img
-      src="/hero.jpg"
-      alt="Hero Background"
-      class="absolute inset-0 object-cover object-center w-full h-full"
-    />
+    <!-- Swiper 幻燈片背景 -->
+    <Swiper
+      class="absolute inset-0 z-0 w-full h-full"
+      :modules="[Autoplay, EffectFade]"
+      effect="fade"
+      :loop="true"
+      :autoplay="{ delay: 5000, disableOnInteraction: false }"
+      :slides-per-view="1"
+    >
+      <SwiperSlide
+        v-for="(slide, index) in slides"
+        :key="index"
+        class="w-full h-full"
+      >
+        <img
+          :src="slide"
+          alt="Hero Slide"
+          class="object-cover object-center w-full h-full"
+        />
+      </SwiperSlide>
+    </Swiper>
 
     <!-- 黑色遮罩 -->
-    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 bg-black/40 z-[1]"></div>
 
     <!-- 文字區塊 -->
     <div
-      class="relative z-10 flex flex-col items-center justify-center w-full h-full max-w-screen-md px-4 mx-auto text-center text-white"
+      class="absolute inset-0 z-[2] flex flex-col items-center justify-center w-full h-full max-w-screen-md px-4 mx-auto text-center text-white"
     >
       <h1 class="mb-8 text-3xl font-bold md:text-5xl">
         因絆相識，為認真的相遇而來
