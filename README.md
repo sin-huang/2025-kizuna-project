@@ -5,19 +5,14 @@
 ## 目前使用套件
 
 * 前端
-  * `vue`
-  * `pinia`
-  * `tailwindcss`
+  * `Vue.js`
+  * `Pinia`
+  * `Tailwind CSS`
     
 * 後端
-  * `bcrypt`
-  * `cookie-parser`
-  * `express`
-  * `jsonwebtoken`
-  * `passport`
-  * `passport-google-oauth20`
-  * `pg`
-  * `socket.io`
+  * `Express`
+  * `PostgreSQL`
+  * `Socket.IO`
   
 ## 開發相關規定
 
