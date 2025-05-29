@@ -26,7 +26,23 @@ const messagesTable = pgTable("messages", {
   created_at: timestamp().defaultNow().notNull(),
 });
 
+// 使用者個人簡介(地區、興趣)
+const profileTable = pgTable("profile", {
+  // 連接到 usersTable
+  user_id: integer().primaryKey().references(() => usersTable.id).notNull(),
+  gender: varchar({ length: 1 }).notNull(),
+  bio: varchar({ length: 255 }),
+  age: integer().notNull(),
+  location: varchar({ length: 31}).notNull(),
+  zodiac:  varchar({ length: 15}).notNull(),
+  mbti: varchar({ length: 5}).notNull(),
+  job: varchar({ length: 15}).notNull(),
+  interest: varchar({ length: 15}).array().notNull(),
+  orientation: varchar({ length: 15}).notNull(),
+});
+
 module.exports = {
   usersTable,
-  messagesTable
+  messagesTable,
+  profileTable
 }
