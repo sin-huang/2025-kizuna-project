@@ -4,7 +4,7 @@
       class="flex flex-col items-center md:flex-row px-6 md:px-20 bg-[#C0D7EC] md:h-[550px] mt-16 mb-12"
     >
       <!-- 左圖：幻燈片 -->
-      <div class="w-full mb-8 md:w-1/2 md:mb-0">
+      <div class="w-full mb-8 -ml-2 md:w-1/2 md:mb-0 md:-ml-4">
         <ImageCoverflow :images="howToImages" container-class="w-full" />
       </div>
 
@@ -76,6 +76,7 @@
       </div>
     </div>
   </div>
+  <br />
 </template>
 
 <script setup>

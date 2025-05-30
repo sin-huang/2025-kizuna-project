@@ -8,12 +8,13 @@ import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
-  <div>
+  <div class="bg-[#F8F9FA]">
     <HeroSection />
     <FeatureSection />
     <EventCarousel />
     <HowToUseSection />
-    <MemberShowcase />
+    <MemberShowcase :members="myMemberList" />
+    <!-- 假設 myMemberList 是從父組件傳遞過來的成員列表 -->
     <Footer />
   </div>
 </template>

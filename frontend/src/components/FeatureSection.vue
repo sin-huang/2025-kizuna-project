@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <section class="py-16 text-center bg-white border-b">
+  <section class="py-16 text-center border-b">
     <h2 class="mb-6 text-2xl font-bold md:text-3xl">
       為什麼選擇我們？這裡，是最適合你的平台
     </h2>
