@@ -40,7 +40,7 @@ const profileTable = pgTable("profiles", {
   zodiac:  varchar({ length: 15}).notNull(),
   mbti: varchar({ length: 5}).notNull(),
   job: varchar({ length: 15}).notNull(),
-  interest: varchar({ length: 15}).array().notNull(),
+  interests: varchar({ length: 15}).array().notNull(),
   orientation: orientationEnum("orientation").notNull(),
   last_active_at: timestamp({withTimezone: true}).defaultNow().notNull(),
 });
