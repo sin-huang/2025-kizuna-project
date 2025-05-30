@@ -11,7 +11,6 @@ const slides = [
   "/hero3.jpg",
   "/hero4.jpg",
   "/hero5.jpg",
-  "/hero6.jpg",
 ];
 </script>
 
