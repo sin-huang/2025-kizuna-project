@@ -8,7 +8,7 @@
     "generate": "drizzle-kit generate",
     "push": "drizzle-kit push",
     "migrate": "drizzle-kit migrate",
-    "dev:match": "node profileSeed.js"
+    "dev:match": "node src/db/profileSeed.js"
   },
   "repository": {
     "type": "git",
