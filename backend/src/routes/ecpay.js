@@ -3,6 +3,9 @@ const router = express.Router();
 const authMiddleware = require("../middleware/auth.js");
 const ecpay = require("ecpay_aio_nodejs");
 const dotenv = require("dotenv");
+const { db } = require("../db"); 
+const { subscriptionsTable, usersTable } = require("../db/schema.js");
+const { eq } = require("drizzle-orm");
 dotenv.config();
 
 const options = {
@@ -29,7 +32,7 @@ function getTaiwanDateTimeString() {
   const ss = String(date.getSeconds()).padStart(2, "0");
   return `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
 }
-
+// console.log(new Date().toString()); //檢查時區
 // ✅ 建立訂單（付款表單）
 router.post("/create", authMiddleware, async (req, res) => {
   const { plan } = req.body;
@@ -38,26 +41,26 @@ router.post("/create", authMiddleware, async (req, res) => {
   const merchantTradeNo = "SUB" + Date.now();
 
   try {
-    await pool.query(
-      `INSERT INTO subscriptions (user_id, plan, price, status, MerchantTradeNo)
-       VALUES ($1, $2, $3, 'pending', $4)`,
-      [userId, plan, price, merchantTradeNo]
-    );
+    await db.insert(subscriptionsTable).values({
+      user_id: userId,
+      plan,
+      price,
+      status: "pending",
+      MerchantTradeNo: merchantTradeNo,
+      created_at: new Date(),
+    });
 
-    const form = create.payment_client.aio_check_out_all(
-      {
-        MerchantTradeNo: merchantTradeNo,
-        MerchantTradeDate: getTaiwanDateTimeString(),
-        TotalAmount: price.toString(),
-        TradeDesc: "Kizuna 交友訂閱",
-        ItemName: `${plan}會員訂閱 x1`,
-        ReturnURL: process.env.ECPAY_RETURN_URL,
-        ClientBackURL: "http://localhost:5173/member",
-        PaymentType: "aio",
-        ChoosePayment: "Credit",
-        EncryptType: 1,
-        },
-    );
+    const form = create.payment_client.aio_check_out_all({
+      MerchantTradeNo: merchantTradeNo,
+      MerchantTradeDate: getTaiwanDateTimeString(),
+      TotalAmount: price.toString(),
+      TradeDesc: "Kizuna 交友訂閱",
+      ItemName: `${plan}會員訂閱 x1`,
+      ReturnURL: process.env.ECPAY_RETURN_URL,
+      ClientBackURL: "http://localhost:5173/member",
+      PaymentType: "aio",
+      EncryptType: 1,
+    });
 
     res.send(form); // ✅ form 是完整 HTML 字串
   } catch (error) {
@@ -68,29 +71,34 @@ router.post("/create", authMiddleware, async (req, res) => {
 
 // ✅ 綠界通知（付款成功回傳）
 router.post("/notify", async (req, res) => {
+  // console.log("🔍 req.body:", req.body);
   const { MerchantTradeNo, RtnCode, PaymentDate, TradeNo } = req.body;
-  // console.log("📬 綠界通知資料：", req.body);
-
   if (RtnCode === "1") {
     try {
-      // ✅ 更新 subscriptions
-      const result = await pool.query(
-        `UPDATE subscriptions
-         SET status = 'paid', paid_at = $1, trade_no = $2
-         WHERE MerchantTradeNo = $3
-         RETURNING user_id, plan`,
-        [PaymentDate, TradeNo, MerchantTradeNo]
-      );
+      // 1️⃣ 先查訂單
+      const [order] = await db
+        .select()
+        .from(subscriptionsTable)
+        .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
 
-      const sub = result.rows[0];
+      if (!order) return res.status(404).send("0|訂單不存在");
 
-      // ✅ 同步更新 users
-      await pool.query(
-        `UPDATE users SET subscription_plan = $1 WHERE id = $2`,
-        [sub.plan, sub.user_id]
-      );
+      // 2️⃣ 更新訂單狀態
+      await db
+        .update(subscriptionsTable)
+        .set({
+          status: "paid",
+          paid_at: PaymentDate,
+          trade_no: TradeNo,
+        })
+        .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
 
-      // console.log("✅ 資料庫更新成功");
+      // 3️⃣ 更新會員目前方案
+      await db
+        .update(usersTable)
+        .set({ subscription_plan: order.plan })
+        .where(eq(usersTable.id, order.user_id));
+
       res.send("1|OK");
     } catch (error) {
       console.error("❌ 資料庫更新失敗", error);
@@ -100,6 +108,5 @@ router.post("/notify", async (req, res) => {
     res.status(400).send("0|交易未成功");
   }
 });
-
 
 module.exports = router;

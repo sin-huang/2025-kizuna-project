@@ -5,7 +5,9 @@ const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
 const ecpayRoutes = require("./routes/ecpay");
-
+const { db } = require("./db");
+const { usersTable } = require("./db/schema.js");
+const { eq } = require("drizzle-orm");
 // 以下為即時聊天室新增模組
 const http = require("http");
 const { Server } = require("socket.io");
@@ -29,8 +31,8 @@ app.post("/auth/login", authController.login);
 app.post("/refresh", authController.refresh);
 app.get("/auth/google", authController.googleAuth);
 app.get("/auth/google/callback", authController.googleAuthCallback);
-app.use("/api/ecpay", ecpayRoutes);
 app.use(express.urlencoded({ extended: true })); //  處理ecpay /notify 回傳(x-www-form-urlencoded)
+app.use("/api/ecpay", ecpayRoutes);
 
 
 // 測試需要 token 的 API
@@ -40,12 +42,15 @@ app.use(express.urlencoded({ extended: true })); //  處理ecpay /notify 回傳(
 //上面
 app.get("/api/me", authMiddleware, async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT id, username, subscription_plan FROM users WHERE id = $1",
-      [req.user.id]
-    );
+    const [user] = await db
+      .select({
+        id: usersTable.id,
+        username: usersTable.username,
+        subscription_plan: usersTable.subscription_plan,
+      })
+      .from(usersTable)
+      .where(eq(usersTable.id, req.user.id));
 
-    const user = result.rows[0];
     res.json({ user });
   } catch (error) {
     console.error("❌ 無法取得會員資料", error);

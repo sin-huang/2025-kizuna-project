@@ -1,4 +1,4 @@
-const db = require("../db/index.js");
+const { db } = require("../db/index.js");
 const { usersTable } = require("../db/schema.js");
 const { eq } = require("drizzle-orm");
 const jwt = require("jsonwebtoken");
