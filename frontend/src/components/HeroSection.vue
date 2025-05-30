@@ -1,19 +1,3 @@
-<script setup>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/effect-fade";
-
-const slides = [
-  "/hero.jpg",
-  "/hero2.jpg",
-  "/hero3.jpg",
-  "/hero4.jpg",
-  "/hero5.jpg",
-];
-</script>
-
 <template>
   <section class="relative w-full h-screen overflow-hidden">
     <!-- Swiper 幻燈片背景 -->
@@ -63,3 +47,19 @@ const slides = [
     </div>
   </section>
 </template>
+
+<script setup>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
+
+const slides = [
+  "/hero.jpg",
+  "/hero2.jpg",
+  "/hero3.jpg",
+  "/hero4.jpg",
+  "/hero5.jpg",
+];
+</script>
