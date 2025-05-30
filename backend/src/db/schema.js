@@ -15,7 +15,7 @@ const usersTable = pgTable("users", {
   username: varchar({ length: 100 }).notNull(),
   password: varchar({ length: 255 }).notNull(),
   raw_password: varchar({ length: 20 }).notNull(),
-  subscription_plan: varchar({ length: 20 }).default("basic").notNull(),
+  subscription_plan: varchar({ length: 20 }).default("免費").notNull(),
 });
 
 // 訂閱訂單資料

@@ -33,7 +33,7 @@ onMounted(async () => {
     <p class="mb-2">使用者名稱：{{ userStore.username }}</p>
     <p class="mb-4">
       訂閱方案：
-      <span class="font-bold">{{ userStore.subscriptionPlan }}</span>
+      <span>{{ userStore.subscriptionPlan }}</span>
     </p>
     <button
       @click="goSubscribe"

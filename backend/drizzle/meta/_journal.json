@@ -29,6 +29,13 @@
       "when": 1748623538780,
       "tag": "0003_first_psylocke",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1748635286000,
+      "tag": "0004_spotty_chimera",
+      "breakpoints": true
     }
   ]
 }

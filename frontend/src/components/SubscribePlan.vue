@@ -24,16 +24,16 @@ import { checkout } from '@/api/useSubscription.js'
 
 const plans = [
   {
-    name: '高級會員',
-    price: 99,
-    key: 'basic',
-    description: '解鎖基礎交友功能',
+    name: '免費會員',
+    price: 0,
+    key: '免費',
+    description: '基礎交友功能',
   },
   {
-    name: '尊榮會員',
+    name: '付費會員',
     price: 299,
-    key: 'premium',
-    description: '尊爵不凡，解鎖所有功能',
+    key: '付費',
+    description: '解鎖付費功能',
   },
 ]
 </script>

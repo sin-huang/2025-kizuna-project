@@ -36,7 +36,7 @@ function getTaiwanDateTimeString() {
 // ✅ 建立訂單（付款表單）
 router.post("/create", authMiddleware, async (req, res) => {
   const { plan } = req.body;
-  const price = plan === "premium" ? 299 : 99;
+  const price = plan === "付費" ? 299 : 0;
   const userId = req.user.id;
   const merchantTradeNo = "SUB" + Date.now();
 
