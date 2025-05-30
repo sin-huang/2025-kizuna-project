@@ -15,6 +15,20 @@
       "when": 1748271203512,
       "tag": "0001_lean_rawhide_kid",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748622283417,
+      "tag": "0002_concerned_tyrannus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1748623538780,
+      "tag": "0003_first_psylocke",
+      "breakpoints": true
     }
   ]
 }
