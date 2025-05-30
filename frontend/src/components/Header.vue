@@ -1,40 +1,52 @@
 <template>
   <header class="text-white bg-[#7395BA] shadow-md">
-    <nav class="flex items-center justify-start">
-      <RouterLink to="/" class="p-6 text-2xl italic font-light leading-none"
-        >Kizuna</RouterLink
-      >
+    <nav class="flex items-center justify-between px-6 py-4">
+      <!-- 左側 -->
+      <div class="flex items-center">
+        <RouterLink to="/" class="text-2xl italic font-light leading-none">
+          Kizuna
+        </RouterLink>
+      </div>
 
-      <template v-if="store.accessToken">
+      <!-- 中間 -->
+      <div class="flex justify-center flex-1 space-x-4">
         <RouterLink
           to="?"
-          class="p-6 text-lg leading-none transition hover:text-gray-300"
-          >參與活動</RouterLink
+          class="p-4 text-lg leading-none transition hover:text-gray-300"
         >
+          參與活動
+        </RouterLink>
 
         <RouterLink
           to="?"
-          class="p-6 text-lg leading-none transition hover:text-gray-300"
-          >開始滑滑</RouterLink
+          class="p-4 text-lg leading-none transition hover:text-gray-300"
         >
+          開始滑滑
+        </RouterLink>
 
         <RouterLink
           to="/product"
-          class="p-6 text-lg leading-none transition hover:text-gray-300"
-          >購買禮物</RouterLink
+          class="p-4 text-lg leading-none transition hover:text-gray-300"
         >
+          購買禮物
+        </RouterLink>
 
         <RouterLink
           to="/product"
-          class="p-6 text-lg leading-none transition hover:text-gray-300"
-          >解鎖升級</RouterLink
+          class="p-4 text-lg leading-none transition hover:text-gray-300"
         >
+          解鎖升級
+        </RouterLink>
+      </div>
 
+      <!-- 右側 -->
+      <div class="flex items-center space-x-4">
         <RouterLink
           to="/cart"
-          class="p-6 text-lg leading-none transition hover:text-gray-300"
-          >購物車</RouterLink
+          class="text-lg leading-none transition hover:text-gray-300"
         >
+          購物車
+        </RouterLink>
 
         <div class="relative">
           <div
@@ -61,20 +73,7 @@
             >
           </div>
         </div>
-      </template>
-
-      <template v-else>
-        <RouterLink
-          to="/login"
-          class="inline-flex items-center p-6 text-lg leading-none transition hover:text-gray-300"
-          >登入</RouterLink
-        >
-        <RouterLink
-          to="/register"
-          class="inline-flex items-center p-6 text-lg leading-none transition hover:text-gray-300"
-          >註冊</RouterLink
-        >
-      </template>
+      </div>
     </nav>
   </header>
   <main class="max-w-[1000px] mx-auto mt-24">
