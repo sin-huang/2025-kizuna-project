@@ -4,8 +4,8 @@ const passport = require("./config/passport.js");
 const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
+const ecpayRoutes = require("./routes/ecpay");
 
-const pool = require("./config/db.js");
 // 以下為即時聊天室新增模組
 const http = require("http");
 const { Server } = require("socket.io");

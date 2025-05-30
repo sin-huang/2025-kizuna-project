@@ -12,7 +12,6 @@ export const useUserStore = defineStore("user", {
     username: localStorage.getItem("username") || "",
     userId: localStorage.getItem("userId") || "",
     subscriptionPlan: localStorage.getItem("subscriptionPlan") || "free",
-
   }),
   actions: {
     // 註冊
@@ -60,7 +59,6 @@ export const useUserStore = defineStore("user", {
 
         localStorage.setItem("username", this.username);
         localStorage.setItem("userId", this.userId);
-
       } catch (error) {
         if (
           error.response &&
@@ -108,7 +106,7 @@ export const useUserStore = defineStore("user", {
       this.subscriptionPlan = plan;
       localStorage.setItem("subscriptionPlan", plan);
     },
-     // 用 Google 登入
+    // 用 Google 登入
     async loginWithGoogle(idToken) {
       try {
         const res = await axios.post("/auth/google", { idToken });
@@ -126,7 +124,5 @@ export const useUserStore = defineStore("user", {
         console.error("Google登入失敗", error.message);
       }
     },
-
   },
-  },
-);
+});

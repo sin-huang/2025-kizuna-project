@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../config/db.js");
 const authMiddleware = require("../middleware/auth.js");
 const ecpay = require("ecpay_aio_nodejs");
 const dotenv = require("dotenv");
