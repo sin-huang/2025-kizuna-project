@@ -8,7 +8,6 @@ import RegisterView from "@/views/RegisterView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import EditProfileView from "../views/EditProfileView.vue";
-import MatchView from "../views/MatchView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,12 +49,6 @@ const router = createRouter({
       path: "/edit-profile",
       name: "EditProfile",
       component: EditProfileView,
-    },
-    // 加入滑滑區頁面route
-    {
-      path: "/match",
-      name: "Match",
-      component: MatchView,
     },
   ],
 });
