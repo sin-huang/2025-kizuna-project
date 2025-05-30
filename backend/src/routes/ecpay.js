@@ -88,7 +88,7 @@ router.post("/notify", async (req, res) => {
         .update(subscriptionsTable)
         .set({
           status: "paid",
-          paid_at: PaymentDate,
+          paid_at: new Date(PaymentDate),
           trade_no: TradeNo,
         })
         .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
