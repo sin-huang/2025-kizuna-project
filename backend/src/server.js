@@ -4,6 +4,7 @@ const passport = require("./config/passport.js");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 // 以下為即時聊天室新增模組
 const http = require("http");
@@ -25,6 +26,7 @@ app.use(passport.initialize());
 // 掛載 API router
 app.use("/auth", authRoutes);
 app.use("/recommendations", recommendationRoutes)
+app.use("/profile", profileRoutes);
 
 // // 啟用 socket.io 聊天室邏輯
 // setupSocket(io);
