@@ -4,7 +4,7 @@ const passport = require("./config/passport.js");
 const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
-const editProfileRoute = require("./routes/editProfileRoute.js");
+const editProfileRoutes = require("./routes/editProfileRoutes.js");
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ app.get("/api/me", authMiddleware, (req, res) => {
 });
 
 // 掛載子路由群組
-app.use("/api/edit-profile", editProfileRoute);
+app.use("/api/edit-profile", editProfileRoutes);
 
 // 錯誤處理中間件（建議加入）
 app.use((err, req, res, next) => {
