@@ -26,7 +26,15 @@ const messagesTable = pgTable("messages", {
   created_at: timestamp().defaultNow().notNull(),
 });
 
+const cartItems = pgTable("cart_items", {
+  id: serial().primaryKey(),
+  user_id: integer().notNull(),
+  product_id: integer().notNull(),
+  quantity: integer().default(1).notNull(),
+});
+
 module.exports = {
   usersTable,
-  messagesTable
+  messagesTable,
+  cartItems
 }

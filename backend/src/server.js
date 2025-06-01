@@ -9,6 +9,9 @@ const http = require("http");
 const { Server } = require("socket.io");
 const setupSocket = require("./controllers/chatControllers.js");
 
+const cartController = require("./controllers/cartController.js");
+
+
 dotenv.config();
 
 const app = express();
@@ -26,6 +29,13 @@ app.post("/auth/login", authController.login);
 app.post("/refresh", authController.refresh);
 app.get("/auth/google", authController.googleAuth);
 app.get("/auth/google/callback", authController.googleAuthCallback);
+
+
+app.post("/api/cart", authMiddleware, cartController.addToCart);
+app.get("/api/cart", authMiddleware, cartController.getCart);
+app.put("/api/cart/:productId", authMiddleware, cartController.updateQuantity);
+app.delete("/api/cart/:productId", authMiddleware, cartController.removeFromCart);
+app.delete("/api/cart", authMiddleware, cartController.clearCart);
 
 // 測試需要 token 的 API
 app.get("/api/me", authMiddleware, (req, res) => {
