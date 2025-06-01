@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useProductStore } from "./products.js";
-import axios from "../api/axios";
+import axios from "@/api/axios";
 
 
 
