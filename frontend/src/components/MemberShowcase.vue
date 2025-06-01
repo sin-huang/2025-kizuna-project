@@ -30,7 +30,7 @@
   </section>
 
   <!-- 建立帳號區塊 -->
-  <div class="py-16 mt-8 text-center bg-[#C0D7EC]">
+  <div class="py-16 mt-8 text-center bg-primary">
     <p class="mb-4 text-lg italic text-gray-700">
       We’re here to make every connection count, starting with your event.
     </p>

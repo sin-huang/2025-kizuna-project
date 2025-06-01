@@ -1,65 +1,66 @@
 <template>
   <section class="relative w-full h-screen overflow-hidden">
-    <!-- Swiper 幻燈片背景 -->
-    <Swiper
-      class="absolute inset-0 z-0 w-full h-full"
-      :modules="[Autoplay, EffectFade]"
-      effect="fade"
-      :loop="true"
-      :autoplay="{ delay: 5000, disableOnInteraction: false }"
-      :slides-per-view="1"
-    >
-      <SwiperSlide
-        v-for="(slide, index) in slides"
-        :key="index"
-        class="w-full h-full"
-      >
-        <img
-          :src="slide"
-          alt="Hero Slide"
-          class="object-cover object-center w-full h-full"
-        />
-      </SwiperSlide>
-    </Swiper>
+    <!-- 背景影片 -->
+    <video
+      class="absolute inset-0 z-0 object-cover w-full h-full"
+      src="/hero.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
 
-    <!-- 黑色遮罩 -->
-    <div class="absolute inset-0 bg-black/40 z-[1]"></div>
+    <!-- 漸層遮罩 -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-[1]"
+    ></div>
 
     <!-- 文字區塊 -->
     <div
-      class="absolute inset-0 z-[2] flex flex-col items-center justify-center w-full h-full max-w-screen-md px-4 mx-auto text-center text-white"
+      class="absolute inset-0 z-[2] flex flex-col justify-center h-full px-6 text-left text-white md:pl-[10%] md:items-start md:max-w-[50%] items-center text-center md:text-left"
     >
-      <h1 class="mb-8 text-3xl font-bold md:text-5xl">
-        因絆相識，為認真的相遇而來
+      <h1
+        class="mb-6 text-5xl md:text-8xl font-extrabold leading-tight md:leading-[1.2] tracking-wide"
+      >
+        因絆而遇<br />
+        為真誠而來
       </h1>
-      <p class="mb-6 text-lg md:text-xl">
-        聊得來的朋友，走得近的關係。
-        <br />
-        Kizuna 讓你在誠意中找到連結，開啟屬於你的關係故事。
+      <p class="mb-8 text-xl leading-relaxed md:text-2xl drop-shadow-sm">
+        <span class="font-bold text-primary">Real connections,</span>
+        <span class="font-bold text-accent"> heartfelt beginnings.</span>
       </p>
-      <div class="space-x-4">
-        <button
-          class="px-6 py-2 text-sm text-white bg-[#7395BA] rounded-full hover:bg-[#5E7CA0] md:text-base"
-        >
-          開始旅程
-        </button>
-      </div>
+      <button
+        class="relative px-16 py-4 overflow-hidden text-xl font-semibold text-black transition duration-300 bg-white rounded-full hover:scale-105"
+      >
+        <!-- 中文＋英文 -->
+        <span class="relative z-10">
+          開始旅程<br />
+          <small class="text-sm font-normal">Get Started</small>
+        </span>
+
+        <!-- 底色滑動層 -->
+        <span
+          class="absolute inset-0 bg-[#fb8500] translate-y-full transition-transform duration-300 ease-in-out rounded-full opacity-0"
+        ></span>
+      </button>
     </div>
   </section>
 </template>
 
-<script setup>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/effect-fade";
+<style scoped>
+button:hover > span:last-child {
+  transform: translateY(0);
+  opacity: 1;
+}
 
-const slides = [
-  "/hero.jpg",
-  "/hero2.jpg",
-  "/hero3.jpg",
-  "/hero4.jpg",
-  "/hero5.jpg",
-];
-</script>
+button:hover > span:first-child {
+  color: white;
+  position: relative;
+  z-index: 20;
+}
+
+button:hover > span:last-child {
+  transform: translateY(0);
+  opacity: 1;
+}
+</style>

@@ -1,28 +1,5 @@
-<template>
-  <div class="h-[400px] flex flex-col overflow-hidden rounded-lg shadow">
-    <!-- 上半部：活動圖片 -->
-    <div class="w-full h-2/3">
-      <lazy-image
-        src="/party.jpg"
-        alt="event image"
-        class="object-cover w-full h-full"
-      />
-    </div>
-
-    <!-- 下半部：活動資訊 -->
-    <div class="px-3 py-2 text-sm text-gray-800 bg-white h-1/3">
-      <div class="text-xl font-bold truncate">
-        {{ event.title }}
-      </div>
-      <p class="truncate">時間：{{ event.time }}</p>
-      <p class="truncate">地點：{{ event.location }}</p>
-    </div>
-  </div>
-</template>
-
 <script setup>
-import LazyImage from "./LazyImage.vue";
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
 
 const props = defineProps({
   event: {
@@ -30,4 +7,52 @@ const props = defineProps({
     required: true,
   },
 });
+
+// 安全拆解時間字串
+const [month, dayTime] = props.event?.time?.split?.("/") ?? ["", ""];
+const [day, hour] = dayTime?.split?.(" ") ?? ["", ""];
 </script>
+
+<template>
+  <router-link
+    v-if="event && event.time"
+    :to="`/events/${event.id}`"
+    class="block group relative h-[420px] rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition duration-300"
+  >
+    <!-- 活動圖片 -->
+    <img
+      :src="event.image || '/default.jpg'"
+      alt="event image"
+      class="object-cover w-full h-full"
+    />
+
+    <!-- 黑色遮罩 -->
+    <div class="absolute inset-0 bg-black/50" />
+
+    <!-- 活動資訊浮出 -->
+    <div
+      class="absolute bottom-0 left-0 w-full px-5 py-4 text-white z-10 transition-transform duration-500 group-hover:scale-[1.02] flex"
+    >
+      <!-- 左邊：日期 -->
+      <div class="w-40 text-4xl font-bold leading-snug text-center text-white">
+        <div>{{ month }}</div>
+        <div>{{ day }}</div>
+        <div class="text-2xl text-white/80">{{ hour }}</div>
+      </div>
+
+      <!-- 右邊：活動資訊 -->
+      <div class="flex-1 pl-4">
+        <h3 class="mb-1 text-6xl font-bold text-white truncate drop-shadow">
+          {{ event.title }}
+        </h3>
+        <p class="text-lg text-white/80">{{ event.area }}</p>
+        <p class="text-3xl text-white/80">{{ event.venue }}</p>
+      </div>
+    </div>
+
+    <!-- Hover 色塊：只蓋下半部 -->
+    <div
+      class="absolute bottom-0 left-0 z-0 w-full transition-all duration-700 ease-out scale-0 rounded-t-full h-1/3 bg-accent group-hover:scale-100 group-hover:rounded-none"
+    />
+  </router-link>
+</template>
