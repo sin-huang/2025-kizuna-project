@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useProductStore } from "./products.js";
+import axios from "../api/axios";
+
+
 
 export const useCartStore = defineStore("cart", () => {
   // 來自商品列表的 store，要寫在裡面!!!!
@@ -23,7 +26,7 @@ export const useCartStore = defineStore("cart", () => {
   });
 
   // 加入商品到購物車
-  const addCart = (product) => {
+  const addCart = async (product) => {
     const existingItem = cartItems.value.find((item) => item.id === product.id);
 
     if (existingItem) {
@@ -37,12 +40,23 @@ export const useCartStore = defineStore("cart", () => {
       });
     }
 
+      try {
+    await axios.post("/api/cart", {
+      productId: product.id,
+      quantity: 1,
+    });
+    console.log("✅ 成功寫入後端購物車");
+  } catch (err) {
+    console.error("❌ 寫入後端購物車失敗", err);
+  }
+
+
     //更新商品庫存 用id去找對應的東西
     productStore.decreaseInventory(product.id);
   };
 
   //從購物車移除商品(用findIndex，因為不知道要刪第幾個)
-  const removeFromCart = (itemId) => {
+  const removeFromCart = async (itemId) => {
     const index = cartItems.value.findIndex((item) => item.id === itemId);
     // 有找到
     if (index > -1) {
@@ -54,6 +68,13 @@ export const useCartStore = defineStore("cart", () => {
       for (let i = 0; i < item.quantity; i++) {
         productStore.increaseInventory(itemId);
       }
+
+       try {
+      await axios.delete(`/api/cart/${itemId}`);
+      console.log("✅ 成功刪除後端商品");
+    } catch (err) {
+      console.error("❌ 刪除後端商品失敗", err);
+    }
     }
     cartItems.value.splice(index, 1);
     //從index這邊刪掉1筆資料
@@ -88,7 +109,7 @@ export const useCartStore = defineStore("cart", () => {
   };
 
   //清空購物車
-  const clearCart = () => {
+  const clearCart = async () => {
     //恢復所有商品的庫存
 
     //先把單個商品抓出來
@@ -100,6 +121,13 @@ export const useCartStore = defineStore("cart", () => {
     });
     //清空資料
     cartItems.value = [];
+
+    try {
+    await axios.delete("/api/cart");
+    console.log("✅ 成功清空後端購物車");
+  } catch (err) {
+    console.error("❌ 清空後端購物車失敗", err);
+  }
   };
   return {
     cartItems,
