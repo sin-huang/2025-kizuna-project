@@ -10,6 +10,7 @@ import ChatRoomView from "@/views/ChatRoomView.vue";
 import MatchView from "@/views/MatchView.vue";
 import ActivityList from "@/components/ActivityList.vue";
 import EditProfileView from "@/views/EditProfileView.vue";
+import SubscriptionView from "@/views/SubscriptionView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +70,11 @@ const router = createRouter({
       path: "/edit-profile",
       name: "EditProfile",
       component: EditProfileView,
+    },
+    {
+      path: "/subscription",
+      name: "Subscription",
+      component: SubscriptionView,
     },
   ],
 });

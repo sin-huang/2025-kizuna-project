@@ -68,6 +68,12 @@ const handleLogout = () => {
       <RouterLink to="/activities" class="p-6 text-lg transition hover:text-gray-300"
         >活動</RouterLink
       >
+      <RouterLink
+        to="/subscription"
+        class="p-6 text-lg transition hover:text-gray-300"
+      >
+        訂閱專區
+      </RouterLink>
     </nav>
   </header>
   <main class="max-w-[1000px] mx-auto mt-24">
