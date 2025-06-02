@@ -45,12 +45,13 @@
           to="/cart"
           class="text-lg leading-none transition hover:text-gray-300"
         >
-          購物車
+          <font-awesome-icon :icon="['fas', 'cart-shopping']"size="1x" /> 購物車
+          
         </RouterLink>
 
         <div class="relative">
           <div
-            class="flex items-center justify-center w-12 h-12 text-sm font-bold bg-white rounded-full text-[#7395BA]"
+            class="flex items-center justify-center w-12 h-12 text-sm font-bold bg-white rounded-full text-[#7395BA] hover:bg-slate-300"
             @click="toggleDropdown"
           >
             {{ store.username }}
@@ -62,14 +63,20 @@
           >
             <a
               href="#"
-              class="block px-4 py-4 pb-2 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
-              >編輯個人頁面</a
+              class="block px-4 py-4 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
+            >
+              <font-awesome-icon :icon="['fas', 'user-pen']" /> 編輯個人檔案</a
             >
             <a
               href="#"
-              class="block px-4 py-4 pb-2 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
+              class="block px-4 py-4 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
+              ><font-awesome-icon :icon="['fas', 'star']" />  訂閱方案</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-4 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
               @click="handleLogout"
-              >登出</a
+              ><font-awesome-icon :icon="['fas', 'right-to-bracket']" />  登出</a
             >
           </div>
         </div>
