@@ -3,7 +3,7 @@
     <!-- 背景影片 -->
     <video
       class="absolute inset-0 z-0 object-cover w-full h-full"
-      src="/hero.mp4"
+      src="/hero1.mp4"
       autoplay
       muted
       loop

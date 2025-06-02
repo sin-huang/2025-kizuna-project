@@ -50,9 +50,10 @@ const [day, hour] = dayTime?.split?.(" ") ?? ["", ""];
       </div>
     </div>
 
-    <!-- Hover 色塊：只蓋下半部 -->
+    <!-- Hover 色塊遮罩 -->
     <div
-      class="absolute bottom-0 left-0 z-0 w-full transition-all duration-700 ease-out scale-0 rounded-t-full h-1/3 bg-accent group-hover:scale-100 group-hover:rounded-none"
+      class="absolute bottom-0 left-0 z-0 w-full h-1/3 bg-gradient-to-t from-[#fb8500] to-transparent scale-0 opacity-0 rounded-t-full transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100 group-hover:rounded-none"
+      style="transform-origin: bottom center;"
     />
   </router-link>
 </template>

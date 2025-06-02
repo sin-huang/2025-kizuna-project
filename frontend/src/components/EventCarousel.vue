@@ -149,7 +149,7 @@ const events = [
         <span class="block text-xl font-normal text-white/80">Join now</span>
       </span>
       <span
-        class="absolute inset-0 bg-[#fb8500] scale-y-0 origin-bottom transition-transform duration-300 ease-out group-hover:scale-y-100 z-0 rounded-full"
+        class="absolute inset-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 z-0 rounded-full bg-[linear-gradient(45deg,_#fb8500,_#ffb703,_#fb8500)]"
       ></span>
     </button>
   </section>
