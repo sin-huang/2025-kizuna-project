@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1748269355948,
-      "tag": "0000_chilly_kinsey_walden",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1748271203512,
-      "tag": "0001_lean_rawhide_kid",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1748622283417,
-      "tag": "0002_concerned_tyrannus",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1748623538780,
-      "tag": "0003_first_psylocke",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1748635286000,
-      "tag": "0004_spotty_chimera",
+      "when": 1748884856345,
+      "tag": "0000_fluffy_strong_guy",
       "breakpoints": true
     }
   ]

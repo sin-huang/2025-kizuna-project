@@ -27,7 +27,7 @@ const subscriptionsTable = pgTable("subscriptions", {
   status: varchar({ length: 20 }).notNull(), // 狀態：pending, paid
   MerchantTradeNo: varchar({ length: 30 }).notNull(), // 綠界自訂編號（不能重複）
   trade_no: varchar({ length: 30 }), // 綠界平台回傳的交易編號
-  paid_at: timestamp(), 
+  paid_at: varchar({ length: 32 }), //拿綠界傳回的台灣時間字串，用timestamp()會是UTC-0
   created_at: timestamp().defaultNow().notNull(),
 });
 

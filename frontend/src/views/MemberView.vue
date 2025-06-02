@@ -2,7 +2,7 @@
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
-import axios from "@/api/axios"; 
+import axios from "@/api/axios";
 
 const userStore = useUserStore();
 const router = useRouter();

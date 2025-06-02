@@ -3,7 +3,7 @@ const router = express.Router();
 const authMiddleware = require("../middleware/auth.js");
 const ecpay = require("ecpay_aio_nodejs");
 const dotenv = require("dotenv");
-const { db } = require("../db"); 
+const { db } = require("../db");
 const { subscriptionsTable, usersTable } = require("../db/schema.js");
 const { eq } = require("drizzle-orm");
 dotenv.config();
@@ -19,10 +19,10 @@ const options = {
   IgnorePayment: [],
 };
 
-const create = new ecpay(options);
+const createOrder = new ecpay(options);
 
-// ✅ 時間格式 helper
-function getTaiwanDateTimeString() {
+// ✅ ecpay 時間格式為 yyyy/MM/dd HH:mm:ss
+function getTimeString() {
   const date = new Date();
   const yyyy = date.getFullYear();
   const MM = String(date.getMonth() + 1).padStart(2, "0");
@@ -32,11 +32,12 @@ function getTaiwanDateTimeString() {
   const ss = String(date.getSeconds()).padStart(2, "0");
   return `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
 }
+
 // console.log(new Date().toString()); //檢查時區
 // ✅ 建立訂單（付款表單）
 router.post("/create", authMiddleware, async (req, res) => {
   const { plan } = req.body;
-  const price = plan === "付費" ? 299 : 0;
+  const price = plan === "付費" ? 299 : 20;
   const userId = req.user.id;
   const merchantTradeNo = "SUB" + Date.now();
 
@@ -50,9 +51,9 @@ router.post("/create", authMiddleware, async (req, res) => {
       created_at: new Date(),
     });
 
-    const form = create.payment_client.aio_check_out_all({
+    const form = createOrder.payment_client.aio_check_out_all({
       MerchantTradeNo: merchantTradeNo,
-      MerchantTradeDate: getTaiwanDateTimeString(),
+      MerchantTradeDate: getTimeString(),
       TotalAmount: price.toString(),
       TradeDesc: "Kizuna 交友訂閱",
       ItemName: `${plan}會員訂閱 x1`,
@@ -88,7 +89,7 @@ router.post("/notify", async (req, res) => {
         .update(subscriptionsTable)
         .set({
           status: "paid",
-          paid_at: new Date(PaymentDate),
+          paid_at: PaymentDate,
           trade_no: TradeNo,
         })
         .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
