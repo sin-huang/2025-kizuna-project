@@ -15,10 +15,16 @@ const usersTable = pgTable("users", {
   username: varchar({ length: 100 }).notNull(),
   password: varchar({ length: 255 }).notNull(),
   raw_password: varchar({ length: 20 }).notNull(),
-  subscription_plan: varchar({ length: 20 }).default("免費").notNull(),
+  subscription_plan: integer().default(1).notNull(), // 預設掛免費方案（id = 1）付費是2
 });
 
-// 訂閱訂單資料
+// 訂閱(訂單)資料
+const subscriptionPlansTable = pgTable("subscription_plans", {
+  id: serial().primaryKey().notNull(),
+  name: varchar({ length: 50 }).notNull(),
+  price: integer().notNull(),
+});
+
 const subscriptionsTable = pgTable("subscriptions", {
   id: serial().primaryKey().notNull(), 
   user_id: integer().notNull(), 
@@ -43,5 +49,6 @@ const messagesTable = pgTable("messages", {
 module.exports = {
   usersTable,
   messagesTable,
-  subscriptionsTable
+  subscriptionsTable,
+  subscriptionPlansTable,
 }

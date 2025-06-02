@@ -1,5 +1,5 @@
 {
-  "id": "6647dc1f-bc99-4ed5-87ff-d5faba80b16d",
+  "id": "2870d3ba-a646-4c81-b99b-3459c4b08b76",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -34,10 +34,10 @@
         },
         "subscription_plan": {
           "name": "subscription_plan",
-          "type": "varchar(20)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "default": "'免費'"
+          "default": 1
         }
       },
       "indexes": {},
@@ -140,7 +140,7 @@
         },
         "paid_at": {
           "name": "paid_at",
-          "type": "timestamp",
+          "type": "varchar(32)",
           "primaryKey": false,
           "notNull": false
         },
@@ -150,6 +150,37 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.subscription_plans": {
+      "name": "subscription_plans",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

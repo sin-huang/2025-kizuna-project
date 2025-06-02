@@ -4,7 +4,11 @@ const authMiddleware = require("../middleware/auth.js");
 const ecpay = require("ecpay_aio_nodejs");
 const dotenv = require("dotenv");
 const { db } = require("../db");
-const { subscriptionsTable, usersTable } = require("../db/schema.js");
+const {
+  subscriptionsTable,
+  usersTable,
+  subscriptionPlansTable,
+} = require("../db/schema.js");
 const { eq } = require("drizzle-orm");
 dotenv.config();
 
@@ -36,16 +40,24 @@ function getTimeString() {
 // console.log(new Date().toString()); //檢查時區
 // ✅ 建立訂單（付款表單）
 router.post("/create", authMiddleware, async (req, res) => {
-  const { plan } = req.body;
-  const price = plan === "付費" ? 299 : 20;
+  const { planId } = req.body;
+
+  const [plan] = await db
+    .select()
+    .from(subscriptionPlansTable)
+    .where(eq(subscriptionPlansTable.id, planId));
+
+  if (!plan) return res.status(400).send("❌ 找不到對應方案");
+
+  const price = plan.price;
   const userId = req.user.id;
   const merchantTradeNo = "SUB" + Date.now();
 
   try {
     await db.insert(subscriptionsTable).values({
       user_id: userId,
-      plan,
-      price,
+      plan: plan.name,
+      price: plan.price,
       status: "pending",
       MerchantTradeNo: merchantTradeNo,
       created_at: new Date(),
@@ -56,7 +68,7 @@ router.post("/create", authMiddleware, async (req, res) => {
       MerchantTradeDate: getTimeString(),
       TotalAmount: price.toString(),
       TradeDesc: "Kizuna 交友訂閱",
-      ItemName: `${plan}會員訂閱 x1`,
+      ItemName: `${plan.name}會員訂閱 x1`,
       ReturnURL: process.env.ECPAY_RETURN_URL,
       ClientBackURL: "http://localhost:5173/member",
       PaymentType: "aio",
@@ -72,11 +84,11 @@ router.post("/create", authMiddleware, async (req, res) => {
 
 // ✅ 綠界通知（付款成功回傳）
 router.post("/notify", async (req, res) => {
-  // console.log("🔍 req.body:", req.body);
   const { MerchantTradeNo, RtnCode, PaymentDate, TradeNo } = req.body;
+
   if (RtnCode === "1") {
     try {
-      // 1️⃣ 先查訂單
+      // 1️⃣ 查訂單
       const [order] = await db
         .select()
         .from(subscriptionsTable)
@@ -84,7 +96,15 @@ router.post("/notify", async (req, res) => {
 
       if (!order) return res.status(404).send("0|訂單不存在");
 
-      // 2️⃣ 更新訂單狀態
+      // 2️⃣ 查對應的方案 id（根據 plan name）
+      const [matchedPlan] = await db
+        .select()
+        .from(subscriptionPlansTable)
+        .where(eq(subscriptionPlansTable.name, order.plan));
+
+      if (!matchedPlan) return res.status(404).send("0|方案不存在");
+
+      // 3️⃣ 更新訂單狀態
       await db
         .update(subscriptionsTable)
         .set({
@@ -94,10 +114,10 @@ router.post("/notify", async (req, res) => {
         })
         .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
 
-      // 3️⃣ 更新會員目前方案
+      // 4️⃣ 更新會員目前方案（要設的是 plan.id）
       await db
         .update(usersTable)
-        .set({ subscription_plan: order.plan })
+        .set({ subscription_plan: matchedPlan.id })
         .where(eq(usersTable.id, order.user_id));
 
       res.send("1|OK");

@@ -1,1 +1,0 @@
-ALTER TABLE "users" ALTER COLUMN "subscription_plan" SET DEFAULT '免費';

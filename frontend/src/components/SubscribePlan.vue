@@ -2,20 +2,20 @@
 <script setup>
 import { checkout } from "@/api/useSubscription.js";
 
-const plans = [
-  {
-    name: "免費會員",
-    price: 20,
-    key: "免費",
-    description: "基礎交友功能",
-  },
-  {
-    name: "付費會員",
-    price: 299,
-    key: "付費",
-    description: "解鎖付費功能",
-  },
-];
+// const plans = [
+//   {
+//     name: "免費會員",
+//     price: 20,
+//     key: "免費",
+//     description: "基礎交友功能",
+//   },
+//   {
+//     name: "付費會員",
+//     price: 299,
+//     key: "付費",
+//     description: "解鎖付費功能",
+//   },
+// ];
 </script>
 
 

@@ -3,7 +3,7 @@ CREATE TABLE "users" (
 	"username" varchar(100) NOT NULL,
 	"password" varchar(255) NOT NULL,
 	"raw_password" varchar(20) NOT NULL,
-	"subscription_plan" varchar(20) DEFAULT '免費' NOT NULL
+	"subscription_plan" integer DEFAULT 1 NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "messages" (
@@ -22,6 +22,12 @@ CREATE TABLE "subscriptions" (
 	"status" varchar(20) NOT NULL,
 	"MerchantTradeNo" varchar(30) NOT NULL,
 	"trade_no" varchar(30),
-	"paid_at" timestamp,
+	"paid_at" varchar(32),
 	"created_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "subscription_plans" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar(50) NOT NULL,
+	"price" integer NOT NULL
 );

@@ -9,9 +9,9 @@ export async function checkout(plan) {
       return;
     }
 
-    const response = await axios.post("/api/ecpay/create", { plan });
+    const response = await axios.post("/api/ecpay/create", { planId: plan.id });
 
-    const formHtml = response.data;
+    const formHtml = response.data; //後端送過來的form
 
     // ✅ 插入 form，然後自動送出
     const div = document.createElement("div");

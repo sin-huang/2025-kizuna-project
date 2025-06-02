@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", {
     // 在 state 中定義 username 這樣vue模板才吃得到值
     username: localStorage.getItem("username") || "",
     userId: localStorage.getItem("userId") || "",
-    subscriptionPlan: localStorage.getItem("subscriptionPlan") || "free",
+    subscriptionPlan: localStorage.getItem("subscriptionPlan") || "free", 
   }),
   actions: {
     // 註冊
