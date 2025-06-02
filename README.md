@@ -43,26 +43,34 @@
 
 * `.env`環境變數設定
   
-* 黃馨
+* sin-huang [github](https://github.com/sin-huang)
   * 會員登入/註冊系統
+  * 推薦顯示邏輯
+  * 歷史紀錄
 
-* 王靖瑜
+* chingyu0713 [github](https://github.com/chingyu0713)
   * 串金流系統
 
-* 許可紜
+* c16033 [github](https://github.com/c16033)
   * 聊天室系統
-
-* 蕭仲真
-  * 個人檔案管理(後端)
-
-* 許欣渝
-  * 創建活動/揪團功能
-
-* 許奕亨
-  * 個人檔案管理(前端)
-
-* 蔡文瑜
   * 購物車系統
 
-* 郭俊良
+* Heidi [github](https://github.com/HeidiSiao)
+  * 個人檔案管理(後端)
+  * 配對頁面
+
+* Yunie [github](https://github.com/hsinyuHsu)
+  * 創建活動/揪團功能
+  * 歷史紀錄
+
+* Noid [github](https://github.com/Noiddddddd)
+  * 個人檔案管理(前端)
+  * 建立封鎖/檢舉資料庫
+
+* wen-yu-tsai [github](https://github.com/wen-yu-tsai)
+  * 購物車系統
+  * 創建活動（前端）
+
+* Jun-Liang-Guo [github](https://github.com/Jun-Liang-Guo)
   * 推薦顯示邏輯
+  * 訂閱頁面切版
