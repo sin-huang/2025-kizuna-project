@@ -6,7 +6,7 @@ const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
 const ecpayRoutes = require("./routes/ecpay");
 const { db } = require("./db");
-const { usersTable } = require("./db/schema.js");
+const { usersTable, subscriptionPlansTable } = require("./db/schema.js");
 const { eq } = require("drizzle-orm");
 // 以下為即時聊天室新增模組
 const http = require("http");
@@ -43,15 +43,20 @@ app.use("/api/ecpay", ecpayRoutes);
 app.get("/api/me", authMiddleware, async (req, res) => {
   try {
     const [user] = await db
-      .select({
-        id: usersTable.id,
-        username: usersTable.username,
-        subscription_plan: usersTable.subscription_plan,
-      })
-      .from(usersTable)
-      .where(eq(usersTable.id, req.user.id));
+  .select({
+    id: usersTable.id,
+    username: usersTable.username,
+    subscription_plan: usersTable.subscription_plan,
+    subscription_name: subscriptionPlansTable.name, 
+  })
+  .from(usersTable)
+  .leftJoin(
+    subscriptionPlansTable,
+    eq(usersTable.subscription_plan, subscriptionPlansTable.id)
+  )
+  .where(eq(usersTable.id, req.user.id));
 
-    res.json({ user });
+res.json({ user });
   } catch (error) {
     console.error("❌ 無法取得會員資料", error);
     res.status(500).json({ message: "取得會員資料失敗" });
