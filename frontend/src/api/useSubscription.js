@@ -1,7 +1,7 @@
 import axios from "./axios";
 import { useUserStore } from "@/stores/user";
 
-export async function checkout(plan) {
+export async function checkout(planId) {
   try {
     const store = useUserStore();
     if (!store.accessToken) {
@@ -9,7 +9,7 @@ export async function checkout(plan) {
       return;
     }
 
-    const response = await axios.post("/api/ecpay/create", { planId: plan.id });
+    const response = await axios.post("/api/ecpay/create", { planId });
 
     const formHtml = response.data; //後端送過來的form
 
