@@ -49,14 +49,14 @@ onMounted(async () => {
       <button
         :class="[
           'px-4 py-2 text-white rounded',
-          userStore.subscriptionPlan === plan.id
+          userStore.subscriptionPlan === plan.id || plan.price === 0
             ? 'bg-gray-400 cursor-not-allowed'
             : 'bg-blue-500 hover:bg-blue-600',
         ]"
-        :disabled="userStore.subscriptionPlan === plan.id"
+        :disabled="userStore.subscriptionPlan === plan.id || plan.price === 0"
         @click="checkout(plan.id)"
       >
-        {{ userStore.subscriptionPlan === plan.id ? "目前方案" : "訂閱" }}
+        {{ userStore.subscriptionPlan === plan.id || plan.price === 0 ? "已開通此功能" : "訂閱" }}
       </button>
     </div>
   </div>
