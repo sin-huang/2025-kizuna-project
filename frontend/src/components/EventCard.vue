@@ -27,33 +27,35 @@ const [day, hour] = dayTime?.split?.(" ") ?? ["", ""];
     />
 
     <!-- 黑色遮罩 -->
-    <div class="absolute inset-0 bg-black/50" />
+    <div class="absolute inset-0 bg-black/40" />
 
     <!-- 活動資訊浮出 -->
     <div
-      class="absolute bottom-0 left-0 w-full px-5 py-4 text-white z-10 transition-transform duration-500 group-hover:scale-[1.02] flex"
+      class="absolute bottom-0 left-0 w-full px-5 py-4 text-white z-10 transition-transform duration-500 group-hover:scale-[1.02] flex items-center gap-6"
     >
       <!-- 左邊：日期 -->
-      <div class="w-40 text-4xl font-bold leading-snug text-center text-white">
-        <div>{{ month }}</div>
-        <div>{{ day }}</div>
-        <div class="text-2xl text-white/80">{{ hour }}</div>
+      <div class="w-32 leading-tight text-center">
+        <div class="text-3xl font-bold">{{ month }}</div>
+        <div class="text-5xl font-bold">{{ day }}</div>
+        <div class="text-xl font-bold text-white/80">{{ hour }}</div>
       </div>
 
       <!-- 右邊：活動資訊 -->
-      <div class="flex-1 pl-4">
-        <h3 class="mb-1 text-6xl font-bold text-white truncate drop-shadow">
+      <div class="flex-1">
+        <h3
+          class="mb-1 text-3xl font-bold leading-snug tracking-wide truncate drop-shadow"
+        >
           {{ event.title }}
         </h3>
-        <p class="text-lg text-white/80">{{ event.area }}</p>
-        <p class="text-3xl text-white/80">{{ event.venue }}</p>
+        <!-- <p class="text-lg text-white/80">{{ event.area }}</p> -->
+        <p class="text-xl text-white/80">{{ event.venue }}</p>
       </div>
     </div>
 
     <!-- Hover 色塊遮罩 -->
     <div
-      class="absolute bottom-0 left-0 z-0 w-full h-1/3 bg-gradient-to-t from-[#fb8500] to-transparent scale-0 opacity-0 rounded-t-full transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100 group-hover:rounded-none"
-      style="transform-origin: bottom center;"
+      class="absolute bottom-0 left-0 z-0 w-full transition-all duration-700 ease-out origin-bottom scale-y-0 translate-y-4 opacity-0 h-2/5 blur-sm group-hover:opacity-100 group-hover:scale-y-100 group-hover:translate-y-0 group-hover:blur-0"
+      style="background-image: linear-gradient(to top, #ffb703, transparent)"
     />
   </router-link>
 </template>

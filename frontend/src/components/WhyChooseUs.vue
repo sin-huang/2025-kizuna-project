@@ -23,11 +23,13 @@ const cards = [
     class="flex flex-col items-center justify-between w-full min-h-screen gap-12 px-6 bg-white md:flex-row py-36 text-darkblue"
   >
     <!-- 左側文字區 -->
-    <div class="w-full space-y-8 text-left md:w-1/2">
+    <div class="w-full px-6 space-y-8 text-left md:w-2/3 md:px-28">
       <h2 class="text-4xl font-bold tracking-tight md:text-6xl">
         為什麼選擇我們？
         <br />
-        <span class="block pt-2 pb-2 mt-4 text-4xl font-semibold text-primary md:text-5xl">
+        <span
+          class="block pt-2 pb-2 mt-4 text-4xl font-semibold text-primary md:text-5xl"
+        >
           在這裡，找到真正契合的人
         </span>
       </h2>
@@ -40,37 +42,25 @@ const cards = [
       </p>
     </div>
 
-    <!-- 右側人物＋介紹卡片 -->
-    <div class="flex flex-col items-center max-w-lg mx-auto space-y-8 md:items-start">
-      <!-- 人物圖 -->
-      <!-- <img
-        src="https://www.svgrepo.com/show/522694/character-boy.svg"
-        alt="Friendly character"
-        class="w-40 h-40 animate-wave-hand"
-      /> -->
-
-      <!-- 卡片區塊 -->
-      <div class="grid w-full gap-6 md:grid-cols-1">
-        <div
-          v-for="(card, index) in cards"
-          :key="card.title"
-          class="flex flex-col items-center p-6 text-center transition-all duration-300 bg-white border shadow-sm border-darkblue/20 rounded-xl hover:bg-accent/10 hover:shadow-md md:items-start md:text-left fade-in-up"
-          :style="{ animationDelay: `${index * 0.2}s` }"
-        >
-          <!-- <img
-            :src="card.image"
-            alt="illustration"
-            class="w-16 h-16 mb-3"
-          /> -->
-          <h3 class="mb-1 text-lg font-bold text-darkblue">{{ card.title }}</h3>
-          <p class="text-base leading-relaxed text-gray-700">{{ card.desc }}</p>
-        </div>
+    <!-- 右側卡片區 -->
+    <div
+      class="relative flex flex-col items-start w-full max-w-lg py-20 space-y-5 md:w-1/2 md:-ml-2"
+    >
+      <!-- 卡片們 -->
+      <div
+        v-for="(card, index) in cards"
+        :key="card.title"
+        class="relative z-10 flex flex-col items-center w-full max-w-md p-6 text-center transition-all duration-300 border shadow-md bg-white/80 border-darkblue/20 rounded-xl hover:bg-primary/10 hover:shadow-lg md:items-start md:text-left fade-in-up"
+        :style="{ animationDelay: `${index * 0.2}s` }"
+      >
+        <h3 class="text-xl font-bold text-darkblue">{{ card.title }}</h3>
+        <p class="mt-2 text-sm text-gray-800">{{ card.desc }}</p>
       </div>
     </div>
   </section>
 </template>
 
-<style>
+<style scoped>
 @keyframes fadeInUp {
   from {
     opacity: 0;
