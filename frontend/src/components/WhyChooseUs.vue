@@ -50,8 +50,8 @@ const cards = [
       <div
         v-for="(card, index) in cards"
         :key="card.title"
-        class="relative z-10 flex flex-col items-center w-[90%] -ml-11 max-w-md p-6 text-center transition-all duration-300 border shadow-md bg-white/80 border-darkblue/20 rounded-xl hover:bg-primary/10 hover:shadow-lg md:items-start md:text-left fade-in-up"
-        :style="{ animationDelay: `${index * 0.2}s` }"
+        class="relative z-10 flex flex-col items-center w-[90%] -ml-11 max-w-md p-6 text-center transition-all duration-500 border shadow-md bg-white/80 border-darkblue/20 rounded-xl hover:bg-primary/10 hover:shadow-xl hover:scale-105 hover:-translate-y-2 md:items-start md:text-left fade-in-up"
+        :style="{ animationDelay: `${index * 0.3}s` }"
       >
         <h3 class="text-xl font-bold text-darkblue">{{ card.title }}</h3>
         <p class="mt-2 text-sm text-gray-800">{{ card.desc }}</p>
@@ -64,7 +64,7 @@ const cards = [
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -74,6 +74,20 @@ const cards = [
 
 .fade-in-up {
   opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
 }
 </style>

@@ -142,7 +142,7 @@ const events = [
   <!-- 按鈕區 -->
   <section class="flex items-center justify-center w-full py-10">
     <button
-      class="relative w-80 py-5 px-10 text-2xl font-bold text-white rounded-full bg-[#023047] overflow-hidden group"
+      class="relative w-80 py-5 text-2xl font-bold text-white rounded-full bg-[#023047] overflow-hidden group"
     >
       <span class="relative z-10 block text-white">
         立即報名<br />
