@@ -54,7 +54,7 @@ onMounted(async () => {
             : 'bg-blue-500 hover:bg-blue-600',
         ]"
         :disabled="userStore.subscriptionPlan === plan.id || plan.price === 0"
-        @click="checkout(plan.id)"
+        @click="checkout(plan.id, plan.price)"
       >
         {{ userStore.subscriptionPlan === plan.id || plan.price === 0 ? "已開通此功能" : "訂閱" }}
       </button>

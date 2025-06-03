@@ -49,6 +49,9 @@ router.post("/create", authMiddleware, async (req, res) => {
 
   if (!plan) return res.status(400).send("❌ 找不到對應方案");
 
+  if (plan.price === 0) {
+    return res.status(400).send("❌ 免費方案無需建立訂單，請直接使用");
+  }
   const price = plan.price;
   const userId = req.user.id;
   const merchantTradeNo = "SUB" + Date.now();
@@ -109,7 +112,7 @@ router.post("/notify", async (req, res) => {
         .update(subscriptionsTable)
         .set({
           status: "paid",
-          paid_at: PaymentDate,//這是string
+          paid_at: PaymentDate, //這是string
           trade_no: TradeNo,
         })
         .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
@@ -131,4 +134,3 @@ router.post("/notify", async (req, res) => {
 });
 
 module.exports = router;
-

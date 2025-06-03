@@ -24,7 +24,7 @@ onMounted(async () => {
     });
 
     const user = res.data.user;
-    console.log(user);
+    // console.log(user);
 
     // 存入 store 裡（如果你要用的話）
     userStore.setSubscription(user.subscription_plan);
@@ -36,11 +36,16 @@ onMounted(async () => {
     if (user.subscription_plan !== 1 && user.paid_at) {
       const paidAt = new Date(user.paid_at);
       const expire = new Date(paidAt);
-      expire.setDate(expire.getDate() + 30); // 加 30 天
+      expire.setTime(paidAt.getTime() + 30 * 24 * 60 * 60 * 1000); //才能算到時、分
       const yyyy = expire.getFullYear();
       const MM = String(expire.getMonth() + 1).padStart(2, "0");
       const dd = String(expire.getDate()).padStart(2, "0");
-      expireDate.value = `${yyyy}/${MM}/${dd}`;
+      const hh = String(expire.getHours()).padStart(2, "0");
+      const mm = String(expire.getMinutes()).padStart(2, "0");
+      
+      expireDate.value = `${yyyy}/${MM}/${dd} ${hh}:${mm}`;
+      // console.log("paid_at 原始", user.paid_at);
+      // console.log("計算後 expireDate", expireDate.value);
     }
   } catch (error) {
     console.error("⚠️ 無法取得會員資料", error);

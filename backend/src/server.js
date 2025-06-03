@@ -5,13 +5,15 @@ const dotenv = require("dotenv");
 const authMiddleware = require("./middleware/auth.js");
 const authController = require("./controllers/authControllers.js");
 
-
 const ecpayRoutes = require("./routes/ecpay");
 const subPlansRoutes = require("./routes/subPlans");
 const { db } = require("./db");
-const { usersTable, subscriptionPlansTable, subscriptionsTable } = require("./db/schema.js");
-const { eq } = require("drizzle-orm");
-
+const {
+  usersTable,
+  subscriptionPlansTable,
+  subscriptionsTable,
+} = require("./db/schema.js");
+const { desc, and, eq } = require("drizzle-orm");
 
 // 以下為即時聊天室新增模組
 const http = require("http");
@@ -37,7 +39,6 @@ app.post("/refresh", authController.refresh);
 app.get("/auth/google", authController.googleAuth);
 app.get("/auth/google/callback", authController.googleAuthCallback);
 
-
 app.use(express.urlencoded({ extended: true })); //  處理ecpay /notify 回傳(x-www-form-urlencoded)
 app.use("/api/ecpay", ecpayRoutes);
 app.use("/api/subPlans", subPlansRoutes);
@@ -49,31 +50,42 @@ app.use("/api/subPlans", subPlansRoutes);
 //上面
 app.get("/api/me", authMiddleware, async (req, res) => {
   try {
+    //把使用者資料抓出來（基本資訊 + 訂閱方案名稱）
     const [user] = await db
       .select({
         id: usersTable.id,
         username: usersTable.username,
         subscription_plan: usersTable.subscription_plan,
         subscription_name: subscriptionPlansTable.name,
-        paid_at: subscriptionsTable.paid_at,
       })
       .from(usersTable)
       .leftJoin(
         subscriptionPlansTable,
         eq(usersTable.subscription_plan, subscriptionPlansTable.id)
       )
-      .leftJoin(
-        subscriptionsTable,
-        eq(subscriptionsTable.user_id, usersTable.id) 
-      )
       .where(eq(usersTable.id, req.user.id));
+
+    //查訂單：抓出「最新一筆付款成功的訂單」的時間
+    const [latestPaidOrder] = await db
+      .select({
+        paid_at: subscriptionsTable.paid_at,
+      })
+      .from(subscriptionsTable)
+      .where(
+        and(
+          eq(subscriptionsTable.user_id, req.user.id),
+          eq(subscriptionsTable.status, "paid")
+        )
+      )
+      .orderBy(desc(subscriptionsTable.paid_at))
+      .limit(1);
 
     res.json({
       user: {
         username: user.username,
         subscription_plan: user.subscription_plan,
         subscription_name: user.subscription_name,
-        paid_at: user.paid_at ?? null, // 確保沒訂閱也不會出錯
+        paid_at: latestPaidOrder?.paid_at ?? null,
       },
     });
   } catch (error) {
@@ -81,7 +93,6 @@ app.get("/api/me", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "取得會員資料失敗" });
   }
 });
-
 
 // // 啟用 socket.io 聊天室邏輯
 // setupSocket(io);

@@ -1,11 +1,15 @@
 import axios from "./axios";
 import { useUserStore } from "@/stores/user";
 
-export async function checkout(planId) {
+export async function checkout(planId, price) {
   try {
     const store = useUserStore();
     if (!store.accessToken) {
       alert("請先登入！");
+      return;
+    }
+    if (price === 0) {
+      alert("免費方案無需訂閱");
       return;
     }
 
