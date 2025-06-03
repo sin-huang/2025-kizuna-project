@@ -23,7 +23,7 @@ const cards = [
     class="flex flex-col items-center justify-between w-full min-h-screen gap-12 px-6 bg-white md:flex-row py-36 text-darkblue"
   >
     <!-- 左側文字區 -->
-    <div class="w-full px-6 space-y-8 text-left md:w-2/3 md:px-28">
+    <div class="w-full px-6 space-y-8 text-left md:w-1/2 md:px-28">
       <h2 class="text-4xl font-bold tracking-tight md:text-6xl">
         為什麼選擇我們？
         <br />

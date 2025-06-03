@@ -1,9 +1,9 @@
 <script setup></script>
 
 <template>
-  <footer class="py-8 text-gray-100 bg-[#373737]">
+  <footer class="py-8 text-gray-100 bg-black">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h1 class="mb-6 text-5xl font-bold text-center md:text-5xl">Kizuna</h1>
+      <h1 class="mb-6 font-serif text-5xl italic font-bold text-center md:text-5xl">Kizuna</h1>
       <div>
         <!-- 導覽區塊 -->
         <div

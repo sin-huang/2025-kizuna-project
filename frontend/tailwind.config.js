@@ -2,8 +2,11 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        'xxs': '0.65rem',
+      },
       fontFamily: {
-        sans: ["Zen Kaku Gothic New", "Nunito", "sans-serif"],
+        sans: ['Poppins', 'Zen Kaku Gothic New', 'Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         primary: "#8ecae6",

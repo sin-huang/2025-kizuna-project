@@ -3,29 +3,20 @@ import { RouterLink, RouterView } from "vue-router";
 import { useUserStore } from "./stores/user";
 import router from "./router";
 import { ref, onMounted } from "vue";
-import HeroSection from "./components/HeroSection.vue"; // 你自己的主畫面內容元件
 
 const isLoading = ref(true);
 
 onMounted(() => {
   setTimeout(() => {
     isLoading.value = false;
-  }, 2000); // 動畫時間稍微長一點
+  }, 2000); // 動畫時間
 });
-
-const store = useUserStore();
-
-const handleLogout = () => {
-  store.logout();
-  alert("已登出");
-  router.push("/login");
-};
 </script>
 
 <template>
   <div
     v-if="isLoading"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black"
+    class="fixed inset-0 z-50 flex items-center justify-center font-sans bg-black"
   >
     <svg
       viewBox="0 0 800 200"
@@ -59,7 +50,7 @@ const handleLogout = () => {
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 @keyframes draw {
   to {
@@ -85,52 +76,3 @@ const handleLogout = () => {
   animation-delay: 2.5s;
 }
 </style>
-
-<!-- <template>
-  <header class="text-white bg-blue-900 shadow-md">
-    <nav class="flex justify-start">
-      <RouterLink to="/" class="p-6 text-lg transition hover:text-gray-300"
-        >首頁</RouterLink
-      >
-      <RouterLink
-        to="/product"
-        class="p-6 text-lg transition hover:text-gray-300"
-        >商品列表</RouterLink
-      >
-      <RouterLink to="/cart" class="p-6 text-lg transition hover:text-gray-300"
-        >購物車</RouterLink
-      > -->
-<!-- 有token 代表已經登入 所以只剩登出按鈕 -->
-<!-- <template v-if="store.accessToken">
-        <button
-          @click="handleLogout"
-          class="p-6 text-lg transition hover:text-gray-300"
-        >
-          登出
-        </button>
-        <div class="p-6 text-lg transition hover:text-gray-300">
-          目前登入帳號為 : -->
-<!-- ml-2表示 margin-left加上0.5rem的間距 -->
-<!-- <span class="ml-2">{{ store.username }}</span>
-        </div>
-      </template> -->
-<!-- 沒有token 請先登入或註冊新帳號 -->
-<!-- <template v-else>
-        <RouterLink
-          to="/login"
-          class="p-6 text-lg transition hover:text-gray-300"
-          >登入</RouterLink
-        >
-        <RouterLink
-          to="/register"
-          class="p-6 text-lg transition hover:text-gray-300"
-          >註冊</RouterLink
-        >
-      </template>
-    </nav>
-  </header>
-  <main> -->
-<!-- 原本的 main class="max-w-[1000px] mx-auto mt-24" -->
-<!-- <RouterView />
-  </main>
-</template> -->

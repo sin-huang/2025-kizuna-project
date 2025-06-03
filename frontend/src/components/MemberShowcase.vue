@@ -1,51 +1,53 @@
 <template>
-  <section class="py-12 mt-16 mb-12 text-center">
-    <h1 class="text-2xl font-medium md:text-3xl">
-      在 <span class="font-serif italic">Kizuna</span> 開始你的連結旅程
-    </h1>
-    <p class="mt-2 text-gray-600">找到聊得來的夥伴，讓每一次配對更有意義。</p>
+  <section class="py-16 overflow-hidden bg-white">
+    <div class="max-w-6xl px-6 mx-auto text-center">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900 md:text-4xl">
+        在
+        <span class="font-serif italic text-secondary">Kizuna</span>
+        開始你的連結旅程
+      </h1>
+      <p class="mt-3 text-base text-gray-500 md:text-lg">
+        找到聊得來的夥伴，讓每一次配對更有意義。
+      </p>
 
-    <!-- 無限滑動區塊 -->
-    <div class="relative w-[1292px] mt-12 overflow-hidden mx-auto">
-      <div
-        class="flex justify-center gap-5 animate-slide group-hover:pause-slide"
-        :style="{ animationDuration: animationDuration + 's' }"
-      >
-        <!-- 兩輪卡片實現無縫滑動 -->
-        <template v-for="repeat in 2" :key="repeat">
-          <div
-            v-for="(member, index) in members"
-            :key="`${repeat}-${index}`"
-            class="flex-shrink-0"
-          >
-            <MemberCard
-              :photo="member.photo"
-              :firstName="member.firstName"
-              :lastName="member.lastName"
-            />
-          </div>
-        </template>
+      <!-- 自動無限滑動區塊 -->
+      <div class="relative mt-10">
+        <div
+          class="flex gap-6 w-max animate-slide"
+          :style="{ animationDuration: animationDuration + 's' }"
+        >
+          <!-- 兩輪卡片實現無縫輪播 -->
+          <template v-for="repeat in 2" :key="repeat">
+            <div
+              v-for="(member, index) in members"
+              :key="`${repeat}-${index}`"
+              class="flex-shrink-0 w-52"
+            >
+              <MemberCard
+                :photo="member.photo"
+                :firstName="member.firstName"
+                :lastName="member.lastName"
+              />
+            </div>
+          </template>
+        </div>
+      </div>
+      <div class="mt-12">
+        <button
+          class="px-16 py-6 text-xl font-bold tracking-wide text-white transition-all duration-300 rounded-full shadow-xl ring-2 ring-pink-300 bg-gradient-to-r from-secondary to-pink-500 hover:scale-110 hover:brightness-110"
+        >
+          立即開始配對<br />
+          <span class="text-base font-normal">Let’s Match!</span>
+        </button>
       </div>
     </div>
   </section>
-
-  <!-- 建立帳號區塊 -->
-  <div class="py-16 mt-8 text-center bg-primary">
-    <p class="mb-4 text-lg italic text-gray-700">
-      We’re here to make every connection count, starting with your event.
-    </p>
-    <button
-      class="px-6 py-2 text-sm text-white bg-[#7395BA] rounded-full hover:bg-[#5E7CA0] md:text-base"
-    >
-      建立帳號
-    </button>
-  </div>
 </template>
 
 <script setup>
 import MemberCard from "./MemberCard.vue";
 
-const animationDuration = 40; // 調整數字改變滑動速度，越大越慢
+const animationDuration = 40; // 秒，越大越慢越柔順
 
 const members = [
   { photo: "/people.jpg", firstName: "Jhon", lastName: "Osteen" },
@@ -62,7 +64,7 @@ const members = [
 <style scoped>
 @keyframes slide {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-50%);
@@ -71,10 +73,5 @@ const members = [
 
 .animate-slide {
   animation: slide linear infinite;
-  width: max-content;
-}
-
-.group-hover\:pause-slide:hover {
-  animation-play-state: paused;
 }
 </style>

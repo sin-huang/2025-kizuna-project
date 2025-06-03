@@ -1,26 +1,14 @@
 <template>
-  <div class="relative w-48 h-64 overflow-hidden shadow-lg rounded-xl">
-    <LazyImage
-      :src="photo"
-      alt="User photo"
-      class="object-cover w-full h-full"
-    />
-    <div
-      class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
-    ></div>
-    <div class="absolute text-lg font-bold text-white bottom-4 left-4">
-      <p>{{ firstName }}</p>
-      <p>{{ lastName }}</p>
+  <div class="w-full overflow-hidden bg-white shadow-md rounded-xl">
+    <img :src="photo" alt="Member Photo" class="object-cover w-full h-40" />
+    <div class="p-4 text-center">
+      <p class="text-lg font-semibold text-darkblue">
+        {{ firstName }} {{ lastName }}
+      </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import LazyImage from "./LazyImage.vue";
-
-defineProps({
-  photo: String,
-  firstName: String,
-  lastName: String,
-});
+defineProps(["photo", "firstName", "lastName"]);
 </script>

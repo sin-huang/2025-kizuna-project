@@ -1,122 +1,82 @@
-<script setup>
-import ImageCoverflow from "./ImageCoverflow.vue";
-const howToImages = ["/howToUse.jpg", "/howToUse2.jpg", "/howToUse3.jpg"];
-</script>
-
 <template>
-  <div>
+  <section class="flex items-center min-h-screen px-6 py-20 bg-white">
     <div
-      class="flex flex-col items-center md:flex-row px-6 md:px-20 bg-primary md:h-[550px] mt-16 mb-12"
+      class="flex flex-col-reverse items-center gap-12 mx-auto max-w-7xl md:flex-row"
     >
-      <!-- 左圖：幻燈片 -->
-      <div class="w-full mb-8 md:w-1/2 md:mb-0 md:pl-12">
-        <ImageCoverflow :images="howToImages" container-class="w-full" />
+      <!-- 向量圖 / 插圖 -->
+      <div class="w-full md:w-1/2">
+        <img
+          src="https://undraw.co/api/illustrations/6304b3db-6aa1-4d57-b7c4-45d66300cf89"
+          alt="Kizuna Guide Illustration"
+          class="w-full max-w-md mx-auto shadow-xl rounded-2xl"
+        />
       </div>
-      <!-- 右側說明 -->
-      <div class="w-full md:w-1/2 md:pl-12">
+
+      <!-- 文字說明 -->
+      <div class="w-full text-center md:w-1/2 md:text-left">
+        <!-- 主標 + 副標 -->
         <h2
-          class="mb-8 text-3xl italic font-semibold text-darkblue md:text-5xl"
+          class="mb-4 text-5xl font-extrabold leading-tight tracking-tight text-gray-900 md:text-6xl"
         >
-          探索 Kizuna 的使用方法
-          <span
-            class="block mt-1 text-base font-normal md:text-2xl text-darkblue/70"
-          >
-            Explore How to Use Kizuna
-          </span>
+          Get started with Kizuna
+          <span class="block text-secondary">展開你的人際探索之旅</span>
         </h2>
-        <div class="space-y-8 text-base leading-relaxed text-darkblue">
-          <div class="flex items-start gap-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="48px"
-              viewBox="0 -960 960 960"
-              width="48px"
-              fill="#023047"
-            >
-              <path
-                d="M358.67-226.67ZM38.67-160v-100q0-34.67 17.83-63.17T105.33-366q69.34-31.67 129.67-46.17 60.33-14.5 123.67-14.5 38.66 0 75.16 5.17t75.84 17.17q-10.29 13.64-17.82 28.48Q484.33-361 479-345q-31-9-59.83-12-28.84-3-60.5-3-56.67 0-108 11.83-51.34 11.84-117.34 42.17-12.33 5.67-20.16 18.67-7.84 13-7.84 27.33v33.33h366.34q3.85 18.22 10.59 34.78Q489-175.33 498-160H38.67Zm320-320.67q-66 0-109.67-43.66Q205.33-568 205.33-634T249-743.67q43.67-43.66 109.67-43.66t109.66 43.66Q512-700 512-634t-43.67 109.67q-43.66 43.66-109.66 43.66ZM732-634q0 66-43.67 109.67-43.66 43.66-109.66 43.66-11 0-25.67-1.83-14.67-1.83-25.67-5.5 25-27.33 38.17-64.67Q578.67-590 578.67-634t-13.17-80q-13.17-36-38.17-66 12-3.67 25.67-5.5 13.67-1.83 25.67-1.83 66 0 109.66 43.66Q732-700 732-634Zm-373.33 86.67q37 0 61.83-24.84Q445.33-597 445.33-634t-24.83-61.83q-24.83-24.84-61.83-24.84t-61.84 24.84Q272-671 272-634t24.83 61.83q24.84 24.84 61.84 24.84Zm0-86.67Zm327.88 447.33q36.78 0 61.62-24 24.83-24 25.16-62.66.34-36.67-24.93-61.67-25.28-25-61.84-25T625-335.12q-25 24.89-25 61.67t24.88 61.78q24.89 25 61.67 25Zm.12 66.67q-63.25 0-108.29-45.04-45.05-45.04-45.05-108.29 0-64 45.05-108.67 45.04-44.67 108.29-44.67 64 0 108.66 44.67Q840-337.33 840-273.33q0 23.24-6.17 43.95-6.16 20.71-17.83 38.71L917.33-89.33l-44 44L772-146q-18.61 13-39.8 19.5-21.2 6.5-45.53 6.5Z"
-              />
-            </svg>
-            <div>
-              <h3 class="mb-1 text-xl font-semibold text-darkblue">組團活動</h3>
-              <h4 class="mb-2 text-sm font-medium text-darkblue/70">
-                Group Activities
-              </h4>
-              <p>
-                參加或建立活動，認識新朋友。<br />
-                Join or create events, meet new friends.
-              </p>
-            </div>
-          </div>
 
-          <div class="flex items-start gap-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="48px"
-              viewBox="0 -960 960 960"
-              width="48px"
-              fill="#023047"
-            >
-              <path
-                d="M880-81 721-240H300q-24.75 0-42.37-17.63Q240-275.25 240-300v-80h440q24.75 0 42.38-17.63Q740-415.25 740-440v-280h80q24.75 0 42.38 17.62Q880-684.75 880-660v579ZM140-425l75-75h405v-320H140v395ZM80-280v-540q0-24.75 17.63-42.38Q115.25-880 140-880h480q24.75 0 42.38 17.62Q680-844.75 680-820v320q0 24.75-17.62 42.37Q644.75-440 620-440H240L80-280Zm60-220v-320 320Z"
-              />
-            </svg>
-            <div>
-              <h3 class="mb-1 text-xl font-semibold text-darkblue">
-                一對一聊天
-              </h3>
-              <h4 class="mb-2 text-sm font-medium text-darkblue/70">
-                One-on-One Chat
-              </h4>
-              <p>
-                與感興趣的人私聊。<br />
-                Chat privately with matches.
-              </p>
-            </div>
-          </div>
+        <!-- 簡短說明 + 英文點綴 -->
+        <p class="mb-10 text-lg text-gray-700 md:text-xl">
+          第一次來？沒問題！三個步驟輕鬆展開探索旅程。
+          <br />
+          <span class="italic text-secondary"
+            >New here? Let’s get you started in 3 simple steps!</span
+          >
+        </p>
 
-          <div class="flex items-start gap-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="48px"
-              viewBox="0 -960 960 960"
-              width="48px"
-              fill="#023047"
+        <!-- 三步驟清單 -->
+        <ul class="space-y-10 text-lg text-left">
+          <li class="flex items-start">
+            <span class="mr-4 text-2xl text-secondary" aria-label="建立個人檔案"
+              >👤</span
             >
-              <path
-                d="M716-120H272v-512l278-288 39 31q6 5 9 14t3 22v10l-45 211h299q24 0 42 18t18 42v81.84q0 7.16 1.5 14.66T915-461L789-171q-8.88 21.25-29.59 36.12Q738.69-120 716-120Zm-384-60h397l126-299v-93H482l53-249-203 214v427Zm0-427v427-427Zm-60-25v60H139v392h133v60H79v-512h193Z"
-              />
-            </svg>
             <div>
-              <h3 class="mb-1 text-xl font-semibold text-darkblue">精準配對</h3>
-              <h4 class="mb-2 text-sm font-medium text-darkblue/70">
-                Precise Matching
-              </h4>
-              <p>
-                根據興趣推薦朋友。<br />
-                Friend recommendations based on interests.
+              <p class="text-xl font-semibold text-gray-800">1. 展現真實自我</p>
+              <p class="mt-1 text-base text-gray-600">
+                建立你的個人檔案，分享興趣與故事，讓他人認識真實的你。
+              </p>
+              <p class="mt-1 text-sm italic text-gray-400">
+                Create a profile that reflects who you truly are.
               </p>
             </div>
-          </div>
-        </div>
+          </li>
+
+          <li class="flex items-start">
+            <span class="mr-4 text-2xl text-secondary">🎯</span>
+            <div>
+              <p class="text-xl font-semibold text-gray-800">
+                2. 找到你的興趣圈
+              </p>
+              <p class="mt-1 text-base text-gray-600">
+                探索活動、加入聚會，或自己發起一場精彩的聚會。
+              </p>
+              <p class="mt-1 text-sm italic text-gray-400">
+                Discover events that match your vibe — or host your own.
+              </p>
+            </div>
+          </li>
+
+          <li class="flex items-start">
+            <span class="mr-4 text-2xl text-secondary">💬</span>
+            <div>
+              <p class="text-xl font-semibold text-gray-800">3. 開啟真實互動</p>
+              <p class="mt-1 text-base text-gray-600">
+                不只傳訊息，更讓對話延伸成真實連結。
+              </p>
+              <p class="mt-1 text-sm italic text-gray-400">
+                Start real conversations that go beyond the screen.
+              </p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </section>
 </template>
-
-<style scoped>
-/* 讓主背景色變淡一點方便閱讀 */
-.bg-primary {
-  background-color: #b6d0ea;
-}
-
-/* 深藍色文字 */
-.text-darkblue {
-  color: #023047;
-}
-
-/* 調整行高 */
-.leading-relaxed {
-  line-height: 1.6;
-}
-</style>
