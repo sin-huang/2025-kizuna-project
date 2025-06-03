@@ -2,17 +2,30 @@
 import { onMounted, ref } from "vue";
 import axios from "@/api/axios";
 import { checkout } from "@/api/useSubscription.js";
+import { useUserStore } from "@/stores/user";
 
+// 使用者目前訂閱方案 id
+const userStore = useUserStore();
 // 用來存從資料庫抓到的方案
 const plans = ref([]);
 
 // 畫面一進來就抓方案
 onMounted(async () => {
   try {
+    // 先更新會員資料
+    const meRes = await axios.get("/api/me", {
+      headers: {
+        Authorization: `Bearer ${userStore.accessToken}`,
+      },
+    });
+    const planId = meRes.data.user.subscription_plan;
+    userStore.setSubscription(planId);
+
+    // 再抓方案列表
     const res = await axios.get("/api/subPlans");
-    plans.value = res.data; // 這裡預期是陣列，每筆像 { id, name, price }
+    plans.value = res.data;
   } catch (error) {
-    console.error("❌ 無法取得訂閱方案", error);
+    console.error("❌ 無法取得訂閱資料", error);
   }
 });
 </script>
@@ -34,10 +47,16 @@ onMounted(async () => {
         </p>
       </div>
       <button
-      class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-      @click="checkout(plan.id)" 
+        :class="[
+          'px-4 py-2 text-white rounded',
+          userStore.subscriptionPlan === plan.id
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-blue-500 hover:bg-blue-600',
+        ]"
+        :disabled="userStore.subscriptionPlan === plan.id"
+        @click="checkout(plan.id)"
       >
-        訂閱
+        {{ userStore.subscriptionPlan === plan.id ? "目前方案" : "訂閱" }}
       </button>
     </div>
   </div>
