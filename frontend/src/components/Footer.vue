@@ -1,9 +1,11 @@
-<script setup></script>
-
 <template>
   <footer class="py-8 text-gray-100 bg-black">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h1 class="mb-6 font-serif text-5xl italic font-bold text-center md:text-5xl">Kizuna</h1>
+      <h1
+        class="mb-6 font-serif text-5xl italic font-bold text-center md:text-5xl"
+      >
+        Kizuna
+      </h1>
       <div>
         <!-- 導覽區塊 -->
         <div
@@ -15,18 +17,18 @@
             <ul class="flex-1 space-y-2">
               <li class="font-bold">導覽 | EXPLORE</li>
               <li>
-                <a href="#" class="hover:text-[#C0D7EC]">為什麼選擇Kizuna</a>
+                <a href="#" class="hover:text-[#8ecae6]">為什麼選擇Kizuna</a>
               </li>
-              <li><a href="#" class="hover:text-[#C0D7EC]">使用指南</a></li>
-              <li><a href="#" class="hover:text-[#C0D7EC]">幫助中心</a></li>
+              <li><a href="#" class="hover:text-[#8ecae6]">使用指南</a></li>
+              <li><a href="#" class="hover:text-[#8ecae6]">幫助中心</a></li>
             </ul>
 
             <ul class="flex-1 space-y-2">
               <li class="font-bold">特色 | FEATURES</li>
               <li>
-                <a href="#" class="hover:text-[#C0D7EC]">探索更多進階功能</a>
+                <a href="#" class="hover:text-[#8ecae6]">探索更多進階功能</a>
               </li>
-              <li><a href="#" class="hover:text-[#C0D7EC]">選擇你的方案</a></li>
+              <li><a href="#" class="hover:text-[#8ecae6]">選擇你的方案</a></li>
             </ul>
 
             <ul class="flex-1 space-y-2">

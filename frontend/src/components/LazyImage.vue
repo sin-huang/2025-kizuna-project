@@ -1,15 +1,3 @@
-<template>
-  <div ref="imgRef" class="w-full h-full">
-    <img
-      v-if="isVisible"
-      :src="src"
-      :alt="alt"
-      :class="class"
-      class="object-cover w-full h-full"
-    />
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 
@@ -35,3 +23,15 @@ onMounted(() => {
   }
 });
 </script>
+
+<template>
+  <div ref="imgRef" class="w-full h-full">
+    <img
+      v-if="isVisible"
+      :src="src"
+      :alt="alt"
+      :class="class"
+      class="object-cover w-full h-full"
+    />
+  </div>
+</template>

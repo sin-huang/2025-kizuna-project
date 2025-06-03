@@ -1,3 +1,7 @@
+<script setup>
+defineProps(["photo", "firstName", "lastName"]);
+</script>
+
 <template>
   <div class="w-full overflow-hidden bg-white shadow-md rounded-xl">
     <img :src="photo" alt="Member Photo" class="object-cover w-full h-40" />
@@ -8,7 +12,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps(["photo", "firstName", "lastName"]);
-</script>

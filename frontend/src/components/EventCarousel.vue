@@ -140,7 +140,7 @@ const events = [
   </section>
 
   <!-- 按鈕區 -->
-  <section class="flex items-center justify-center w-full py-14">
+  <section class="flex items-center justify-center w-full py-10">
     <button
       class="relative w-80 py-5 px-10 text-2xl font-bold text-white rounded-full bg-[#023047] overflow-hidden group"
     >
