@@ -1,31 +1,26 @@
 <script setup>
-import Subscription from '@/components/Subscription.vue'
+import Subscription from "@/components/Subscription.vue";
 </script>
 
+
 <template>
-  <div class="min-h-screen bg-white p-8 flex flex-col items-center">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
-      <!-- 普通會員 -->
+  <div class="min-h-screen px-4 py-12 bg-gray-100">
+    <div class="flex flex-wrap justify-center max-w-5xl gap-8 mx-auto">
       <Subscription
         title="普通會員"
-        price="0"
+        icon="👤"
+        price="$0"
         :features="[
           '瀏覽紀錄限制20個',
           '限制推薦100個 / 天',
           '參加活動',
           '超級喜歡1次(直接對話框)'
         ]"
-        :isPremium="false"
-      >
-        <template #icon>
-          <span class="text-5xl">👤</span>
-        </template>
-      </Subscription>
-
-      <!-- 高級會員 -->
+      />
       <Subscription
         title="高級會員"
-        price="99"
+        icon="🔥"
+        price="$299"
         :features="[
           '普通會員權限',
           '瀏覽紀錄限制20個',
@@ -34,18 +29,12 @@ import Subscription from '@/components/Subscription.vue'
           '送禮功能',
           '超級喜歡5次'
         ]"
-        :isPremium="true"
-      >
-        <template #icon>
-          <span class="text-5xl">🔥</span>
-        </template>
-      </Subscription>
+      />
     </div>
-
-    <button
-      class="mt-10 bg-blue-300 text-white font-bold px-6 py-2 rounded hover:bg-blue-400"
-    >
-      返回
-    </button>
+    <div class="flex justify-center mt-12">
+      <button class="px-8 py-2 text-white bg-blue-300 rounded hover:bg-blue-400">
+        返回
+      </button>
+    </div>
   </div>
 </template>
