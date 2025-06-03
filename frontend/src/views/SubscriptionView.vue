@@ -5,6 +5,7 @@ import Subscription from "@/components/Subscription.vue";
 
 <template>
   <div class="min-h-screen px-4 py-12 bg-gray-100">
+    <div class="p-8 bg-white border-4 shadow-lg border-secondary rounded-xl">
     <div class="flex flex-wrap justify-center max-w-5xl gap-8 mx-auto">
       <Subscription
         title="普通會員"
@@ -32,9 +33,10 @@ import Subscription from "@/components/Subscription.vue";
       />
     </div>
     <div class="flex justify-center mt-12">
-      <button class="px-8 py-2 text-white bg-blue-300 rounded hover:bg-blue-400">
+      <button class="px-8 py-2 rounded hover:text-white bg-primary hover:bg-secondary">
         返回
       </button>
+    </div>
     </div>
   </div>
 </template>
