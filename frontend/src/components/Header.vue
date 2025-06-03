@@ -54,13 +54,12 @@
             class="flex items-center justify-center w-12 h-12 text-sm font-bold bg-white rounded-full text-[#7395BA] hover:bg-slate-300"
             @click="toggleDropdown"
           >
-            {{ store.username }}
           </div>
-
           <div
             v-if="isDropdownOpen"
             class="absolute right-0 w-40 mt-2 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-lg"
           >
+                    <span class="flex items-center justify-center px-4 py-4 text-gray-500" > {{ store.username }}</span>
             <a
               href="#"
               class="block px-4 py-4 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
@@ -70,7 +69,7 @@
             <a
               href="#"
               class="block px-4 py-4 text-gray-600 border-b border-gray-300 hover:bg-gray-100"
-              ><font-awesome-icon :icon="['fas', 'star']" />  訂閱方案</a
+              ><font-awesome-icon :icon="['fas', 'star']" />   升級方案</a
             >
             <a
               href="#"
