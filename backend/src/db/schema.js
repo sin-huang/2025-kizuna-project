@@ -23,13 +23,14 @@ const subscriptionPlansTable = pgTable("subscription_plans", {
   id: serial().primaryKey().notNull(),
   name: varchar({ length: 50 }).notNull(),
   price: integer().notNull(),
+  description: varchar({ length: 255 }).default("尚未填寫描述"),
 });
 
 const subscriptionsTable = pgTable("subscriptions", {
-  id: serial().primaryKey().notNull(), 
-  user_id: integer().notNull(), 
-  plan: varchar({ length: 20 }).notNull(), 
-  price: integer().notNull(), 
+  id: serial().primaryKey().notNull(),
+  user_id: integer().notNull(),
+  plan: varchar({ length: 20 }).notNull(),
+  price: integer().notNull(),
   status: varchar({ length: 20 }).notNull(), // 狀態：pending, paid
   MerchantTradeNo: varchar({ length: 30 }).notNull(), // 綠界自訂編號（不能重複）
   trade_no: varchar({ length: 30 }), // 綠界平台回傳的交易編號
@@ -51,4 +52,4 @@ module.exports = {
   messagesTable,
   subscriptionsTable,
   subscriptionPlansTable,
-}
+};

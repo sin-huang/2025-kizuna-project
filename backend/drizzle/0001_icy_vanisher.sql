@@ -1,0 +1,1 @@
+ALTER TABLE "subscription_plans" ADD COLUMN "description" varchar(255) DEFAULT '尚未填寫描述';

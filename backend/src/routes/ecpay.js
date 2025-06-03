@@ -109,7 +109,7 @@ router.post("/notify", async (req, res) => {
         .update(subscriptionsTable)
         .set({
           status: "paid",
-          paid_at: PaymentDate,
+          paid_at: PaymentDate,//這是string
           trade_no: TradeNo,
         })
         .where(eq(subscriptionsTable.MerchantTradeNo, MerchantTradeNo));
@@ -131,3 +131,4 @@ router.post("/notify", async (req, res) => {
 });
 
 module.exports = router;
+

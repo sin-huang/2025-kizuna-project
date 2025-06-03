@@ -1,11 +1,14 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "@/api/axios";
 
 const userStore = useUserStore();
 const router = useRouter();
+
+const subscriptionName = ref("（載入中）"); // 顯示「免費會員」或「高級會員」
+const expireDate = ref(""); // 顯示訂閱到期日（只有高級才有）
 
 const goSubscribe = () => {
   router.push("/subscribe");
@@ -19,8 +22,26 @@ onMounted(async () => {
         Authorization: `Bearer ${userStore.accessToken}`,
       },
     });
-    const plan = res.data.user.subscription_plan;
-    userStore.setSubscription(plan);
+
+    const user = res.data.user;
+    console.log(user);
+
+    // 存入 store 裡（如果你要用的話）
+    userStore.setSubscription(user.subscription_plan);
+
+    // 顯示會員等級文字
+    subscriptionName.value = user.subscription_name;
+
+    // 如果不是免費會員，就計算訂閱到期日
+    if (user.subscription_plan !== 1 && user.paid_at) {
+      const paidAt = new Date(user.paid_at);
+      const expire = new Date(paidAt);
+      expire.setDate(expire.getDate() + 30); // 加 30 天
+      const yyyy = expire.getFullYear();
+      const MM = String(expire.getMonth() + 1).padStart(2, "0");
+      const dd = String(expire.getDate()).padStart(2, "0");
+      expireDate.value = `${yyyy}/${MM}/${dd}`;
+    }
   } catch (error) {
     console.error("⚠️ 無法取得會員資料", error);
   }
@@ -31,10 +52,17 @@ onMounted(async () => {
   <div class="max-w-lg p-6 mx-auto">
     <h2 class="mb-4 text-2xl font-bold">會員中心</h2>
     <p class="mb-2">使用者名稱：{{ userStore.username }}</p>
-    <p class="mb-4">
-      訂閱方案：
-      <span>{{ userStore.subscriptionPlan }}</span>
+
+    <p class="mb-2">
+      會員等級：
+      <span>{{ subscriptionName }}</span>
     </p>
+
+    <!-- 顯示訂閱到期日（只有不是免費會員才會出現） -->
+    <p v-if="expireDate" class="mb-4">
+      訂閱至：<span class="font-bold">{{ expireDate }} 到期</span>
+    </p>
+
     <button
       @click="goSubscribe"
       class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-800"
