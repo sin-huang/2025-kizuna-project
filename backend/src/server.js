@@ -12,9 +12,9 @@ const recommendationRoutes = require("./routes/recommendationRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 
 // 以下為即時聊天室新增模組
-const http = require("http");
-const { Server } = require("socket.io");
-const setupSocket = require("./controllers/chatControllers.js");
+// const http = require("http");
+// const { Server } = require("socket.io");
+// const setupSocket = require("./controllers/chatControllers.js");
 
 dotenv.config();
 
