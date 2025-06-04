@@ -10,6 +10,16 @@ const props = defineProps({
 const emit = defineEmits(["goPrev", "goNext"]);
 const prevUser = () => emit("goPrev");
 const nextUser = () => emit("goNext");
+
+import { ref } from "vue";
+const zoomedImage = ref(null); // 存目前放大的圖片網址
+
+const openZoom = (url) => {
+  zoomedImage.value = url;
+};
+const closeZoom = () => {
+  zoomedImage.value = null;
+};
 </script>
 
 <template>
@@ -28,7 +38,8 @@ const nextUser = () => emit("goNext");
         <img
           :src="photo"
           alt="avatar"
-          class="object-cover w-full h-full rounded"
+          class="object-cover w-full h-full rounded cursor-pointer transition-transform duration-300 hover:scale-105"
+          @click="openZoom(photo)"
         />
       </div>
     </div>
@@ -37,6 +48,18 @@ const nextUser = () => emit("goNext");
       <div class="right-arrow transform translate-x-[2px]"></div>
     </button>
   </section>
+
+  <div
+    v-if="zoomedImage"
+    class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center"
+    @click.self="closeZoom"
+  >
+    <img
+      :src="zoomedImage"
+      alt="zoomed"
+      class="w-[600px] h-[800px] object-cover rounded transition-transform duration-300"
+    />
+  </div>
 </template>
 
 <style scoped lang="postcss">
