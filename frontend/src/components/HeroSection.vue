@@ -1,4 +1,20 @@
+<script setup>
+import BannerShowcase from "@/components/BannerShowcase.vue";
+
+const bannerImages = [""];
+</script>
+
 <template>
+  <!-- BannerShowcase 組件 -->
+  <template>
+    <BannerShowcase
+      :items="bannerImages"
+      title="Kizuna"
+      subtitle="by Team"
+      author-text="創作者介紹"
+    />
+  </template>
+
   <section class="relative w-full h-screen overflow-hidden">
     <!-- 背景影片 -->
     <video
@@ -29,13 +45,13 @@
         <span class="block mt-2 animate-slide-up-delay">都藏著一條羈絆</span>
       </h1>
       <p
-        class="mb-8 text-xl leading-relaxed md:text-2xl drop-shadow-sm opacity-0 animate-fade-in-delay"
+        class="mb-8 text-xl leading-relaxed opacity-0 md:text-2xl drop-shadow-sm animate-fade-in-delay"
       >
         <span class="font-bold text-primary">Real connections,</span>
         <span class="font-bold text-accent"> heartfelt beginnings.</span>
       </p>
       <button
-        class="relative px-16 py-4 overflow-hidden text-xl font-semibold text-black transition duration-300 bg-white rounded-full group hover:scale-105 opacity-0 animate-bounce-in"
+        class="relative px-16 py-4 overflow-hidden text-xl font-semibold text-black transition duration-300 bg-white rounded-full opacity-0 group hover:scale-105 animate-bounce-in"
       >
         <!-- 中文＋英文 -->
         <span class="relative z-10 transition-colors duration-300">
