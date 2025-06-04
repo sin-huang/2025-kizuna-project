@@ -1,11 +1,13 @@
 <script setup>
 import Subscription from "@/components/Subscription.vue";
-import { UserIcon,FireIcon } from "@heroicons/vue/24/outline";
+import { UserIcon, FireIcon } from "@heroicons/vue/24/outline";
 </script>
 
 <template>
   <div class="px-4 pt-4 pb-16 bg-white">
-    <div class="p-12 mx-auto border-4 shadow-lg max-w-7xl border-gray rounded-xl">
+    <div
+      class="p-12 mx-auto border-4 shadow-lg max-w-7xl border-gray rounded-xl"
+    >
       <div class="flex flex-wrap justify-center gap-8">
         <Subscription
           title="普通會員"
