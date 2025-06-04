@@ -8,7 +8,7 @@
       muted
       loop
       playsinline
-      src="/hero2.mp4"
+      src="/hero.mp4"
       type="video/mp4"
     ></video>
 

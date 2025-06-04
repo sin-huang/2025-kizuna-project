@@ -51,10 +51,10 @@ const members = [
       </div>
       <div class="mt-20">
         <button
-          class="w-64 py-8 text-xl font-bold tracking-wide text-white transition-all duration-300 origin-center rounded-full shadow-xl md:text-2xl ring-2 ring-pink-300 bg-gradient-to-r from-secondary to-pink-500 hover:scale-110 hover:brightness-110 hover:animate-pulse"
+          class="py-5 text-2xl font-bold tracking-wide text-white transition-all duration-300 origin-center rounded-full shadow-xl w-80 ring-2 ring-pink-300 bg-gradient-to-r from-secondary to-pink-500 hover:scale-110 hover:brightness-110 hover:animate-pulse"
         >
           立即開始配對<br />
-          <span class="text-base font-normal md:text-xl">Let’s Match!</span>
+          <span class="text-xl font-normal">Let’s Match!</span>
         </button>
       </div>
     </div>
