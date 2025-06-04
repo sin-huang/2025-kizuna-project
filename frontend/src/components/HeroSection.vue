@@ -1,20 +1,4 @@
-<script setup>
-import BannerShowcase from "@/components/BannerShowcase.vue";
-
-const bannerImages = [""];
-</script>
-
 <template>
-  <!-- BannerShowcase 組件 -->
-  <template>
-    <BannerShowcase
-      :items="bannerImages"
-      title="Kizuna"
-      subtitle="by Team"
-      author-text="創作者介紹"
-    />
-  </template>
-
   <section class="relative w-full h-screen overflow-hidden">
     <!-- 背景影片 -->
     <video

@@ -148,8 +148,10 @@ const events = [
         立即報名<br />
         <span class="block text-xl font-normal text-white/80">Join now</span>
       </span>
+
+      <!-- 底色滑動層 -->
       <span
-        class="absolute inset-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 z-0 rounded-full bg-[linear-gradient(45deg,_#fb8500,_#ffb703,_#fb8500)]"
+        class="absolute inset-0 bg-[#fb8500] translate-y-full transition-transform duration-500 ease-in-out rounded-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
       ></span>
     </button>
   </section>
