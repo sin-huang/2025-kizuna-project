@@ -19,14 +19,17 @@ async function createProduct(req, res) {
   try {
     // 前端傳陣列過來
     const products = req.body;
-
+    console.log(products);
     // 檢查是否為陣列
     if (!Array.isArray(products)) {
       return res.status(400).json({ error: "請提供一個商品陣列" });
     }
 
-    const insertedProducts = await db.insert(productsTable).values(products).returning();
-
+    const insertedProducts = await db
+      .insert(productsTable)
+      .values(products)
+      .returning();
+    console.log(insertedProducts);
     res.json(insertedProducts);
   } catch (err) {
     console.error("新增商品失敗", err);
