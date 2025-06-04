@@ -1,5 +1,6 @@
 <script setup>
 import Subscription from "@/components/Subscription.vue";
+import MemberIcon from "../../public/MemberIcon.vue";
 </script>
 
 <template>
@@ -8,7 +9,6 @@ import Subscription from "@/components/Subscription.vue";
       <div class="flex flex-wrap justify-center gap-8">
         <Subscription
           title="普通會員"
-          icon="👤"
           price="$0"
           :features="[
             '瀏覽紀錄限制20個',
@@ -19,7 +19,6 @@ import Subscription from "@/components/Subscription.vue";
         />
         <Subscription
           title="高級會員"
-          icon="🔥"
           price="$299"
           :features="[
             '普通會員權限',
