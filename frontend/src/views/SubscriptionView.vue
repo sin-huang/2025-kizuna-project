@@ -1,6 +1,6 @@
 <script setup>
 import Subscription from "@/components/Subscription.vue";
-import MemberIcon from "../../public/MemberIcon.vue";
+import { UserIcon,FireIcon } from "@heroicons/vue/24/outline";
 </script>
 
 <template>
@@ -10,6 +10,7 @@ import MemberIcon from "../../public/MemberIcon.vue";
         <Subscription
           title="普通會員"
           price="$0"
+          :icon="UserIcon"
           :features="[
             '瀏覽紀錄限制20個',
             '限制推薦100個 / 天',
@@ -20,6 +21,7 @@ import MemberIcon from "../../public/MemberIcon.vue";
         <Subscription
           title="高級會員"
           price="$299"
+          :icon="FireIcon"
           :features="[
             '普通會員權限',
             '瀏覽紀錄限制20個',

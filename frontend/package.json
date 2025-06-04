@@ -4,7 +4,7 @@
   "description": "kizuna(frontend)",
   "type": "module",
   "scripts": {
-    "start":"node src/server/server",
+    "start": "node src/server/server",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -33,6 +33,7 @@
     "vue-eslint-parser": "^10.1.3"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@tailwindcss/postcss": "^4.1.7",
     "@tailwindcss/vite": "^4.1.6",
     "2025-kizuna-frontend": "file:",
