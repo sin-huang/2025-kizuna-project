@@ -10,7 +10,7 @@ defineProps({
 
 <template>
   <div
-    class="flex flex-col justify-between w-full max-w-sm p-6 shadow bg-primary group rounded-xl hover:bg-secondary"
+    class="flex flex-col justify-between w-full max-w-sm p-6 shadow bg-primary-200 group rounded-xl hover:bg-primary-100"
   >
     <div class="flex flex-col items-center text-center">
       <h2 class="mb-4 text-xl font-bold group-hover:text-white">{{ title }}</h2>
@@ -25,7 +25,7 @@ defineProps({
       </ul>
     </div>
     <button
-      class="py-2 mt-6 rounded bg-secondary group-hover:bg-primary group-hover:text-white"
+      class="py-2 mt-6 rounded bg-primary-100 group-hover:bg-primary-200"
     >
       訂閱
     </button>
