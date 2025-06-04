@@ -1,5 +1,5 @@
 {
-  "id": "2870d3ba-a646-4c81-b99b-3459c4b08b76",
+  "id": "5dfcc494-b527-4419-b954-bb4878ccf5e5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -140,7 +140,7 @@
         },
         "paid_at": {
           "name": "paid_at",
-          "type": "varchar(32)",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
@@ -181,6 +181,13 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'尚未填寫描述'"
         }
       },
       "indexes": {},

@@ -22,12 +22,13 @@ CREATE TABLE "subscriptions" (
 	"status" varchar(20) NOT NULL,
 	"MerchantTradeNo" varchar(30) NOT NULL,
 	"trade_no" varchar(30),
-	"paid_at" varchar(32),
+	"paid_at" timestamp,
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "subscription_plans" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" varchar(50) NOT NULL,
-	"price" integer NOT NULL
+	"price" integer NOT NULL,
+	"description" varchar(255) DEFAULT '尚未填寫描述'
 );
