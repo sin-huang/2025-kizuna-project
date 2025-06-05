@@ -36,7 +36,7 @@ onMounted(async () => {
       <div
         v-for="product in products"
         :key="product.id"
-        class="p-4 mb-2 transition-transform shadow-xl hover:scale-105 hover:shadow-2xl"
+        class="p-4 mb-2 transition-transform shadow-xl hover:scale-105 hover:shadow-2xl rounded-[10px]"
       >
         <div class="flex flex-col justify-between h-full">
           <!-- 上半部: 圖片 + 描述 -->
@@ -44,23 +44,31 @@ onMounted(async () => {
             <img
               :src="product.image_url"
               alt="Product Image"
-              class="object-cover w-full b-2"
+              class="object-cover w-full b-2 rounded-[10px]"
             />
           </div>
           <div class="flex flex-col h-full gap-2">
             <p class="font-semibold text-center text-[#023047]">
               {{ product.name }}
             </p>
-            <p class="text-center text-[#023047] font-semibold">價格：{{ product.price }}</p>
-            <p class="mx-12 text-center text-gray-500">{{ product.description }}</p>
+            <p class="text-center text-[#023047] font-semibold">
+              價格：{{ product.price }}
+            </p>
+            <p class="mx-12 text-center text-gray-500">
+              {{ product.description }}
+            </p>
           </div>
           <!-- 下半部 : 庫存 -->
           <!-- 這樣寫是因為商品描述長度不同 會導致庫存在不同水平線上 -->
-          <div class="flex justify-center">
-            <p class="py-2 mr-4 text-[#023047] font-semibold">庫存：{{ product.inventory }}</p>
-            <template v-if="product.inventory <= 5">
-              <p class="">庫存不足 要買要快</p>
-            </template>
+          <div class="flex justify-center mb-4">
+            <p class="py-1 mr-4 text-[#023047] font-semibold">
+              庫存：{{ product.inventory }}
+            </p>
+            <div v-if="product.inventory <= 5">
+              <p class="py-1 px-4 bg-[#ffb703] text-white rounded-[20px]">
+                庫存不足
+              </p>
+            </div>
           </div>
           <button
             @click="addCart(product)"
