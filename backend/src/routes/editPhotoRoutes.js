@@ -8,7 +8,7 @@ const {
   uploadImage,
   getPhotos,
   deletePhoto,
-} = require("../controllers/uploadController");
+} = require("@/controllers/editPhotosControllers");
 
 router.post("/", upload.single("image"), uploadImage);
 router.get("/", getPhotos);
