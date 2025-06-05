@@ -7,8 +7,9 @@ import HomeView from "@/views/HomeView.vue";
 import BrandView from "@/views/BrandView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import ChatRoomView from "@/views/ChatRoomView.vue";
-import MatchView from "@/views/MatchView.vue";
-import ActivityList from "@/components/ActivityList.vue";
+import MatchView from "../views/MatchView.vue";
+import ActivityList from "@/components/ActivityList.vue"
+import ActivityView from "@/components/ActivityForm.vue"
 import EditProfileView from "@/views/EditProfileView.vue";
 
 const router = createRouter({
@@ -63,6 +64,16 @@ const router = createRouter({
       path: "/activities",
       name: "Activities",
       component: ActivityList,
+    },
+    {
+      path: "/activities/new",
+      name: "activityCreate",
+      component: ActivityView,
+    },
+    {
+      path: "/activities/edit/:id",
+      name: "activityEdit",
+      component: ActivityView,
     },
     // 加入編輯個人檔案頁面route
     {
