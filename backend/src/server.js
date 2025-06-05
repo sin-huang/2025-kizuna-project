@@ -8,6 +8,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const productRoutes = require("./routes/productRoutes");
 const editPhotoRoutes = require("./routes/editPhotoRoutes.js");
 const editProfileRoutes = require("./routes/editProfileRoutes");
+const activityRoutes = require("./routes/activityRoutes");
 
 // 以下為即時聊天室新增模組
 // const http = require("http");
@@ -27,6 +28,7 @@ app.use("/auth", authRoutes);
 app.use("/recommendations", recommendationRoutes);
 app.use("/order", orderRoutes);
 app.use("/products", productRoutes);
+app.use("/activities", activityRoutes);
 
 // 掛載子路由群組 REST API建議 以資源為單位
 app.use("/profile", editProfileRoutes);
